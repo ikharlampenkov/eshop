@@ -1,0 +1,1 @@
+/** * class Rubric *  */class Rubric{    /** Aggregations: */    /** Compositions: */     /*** Attributes: ***/} // end of Rubric?>

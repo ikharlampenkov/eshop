@@ -1,0 +1,1 @@
+/** * class ProductCatalog *  */class ProductCatalog{    /** Aggregations: */    /** Compositions: */     /*** Attributes: ***/} // end of ProductCatalog?>
