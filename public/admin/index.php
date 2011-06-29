@@ -79,6 +79,17 @@ if ($page == 'user') {
 }
 
 if ($page == 'catalog') {
+    $o_catalog = new ProductCatalog();
+    
+    if (isset ($_GET['rubric'])) {
+        $cur_rubric = Rubric::getInstanceById($_GET['rubric']);
+    } else {
+        $cur_rubric = Rubric::getRootRubric();
+    }
+    
+    $o_smarty->assign('cur_rubric', $cur_rubric);
+    
+    $o_smarty->assign('rubric_list', $o_catalog->getAllRubric($cur_rubric->getId()));
     
 }
 
