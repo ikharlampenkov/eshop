@@ -1,0 +1,83 @@
+info   SELECT login, password, role FROM user WHERE login="admin"  29.06.2011 21:47
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:47
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:47
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:47
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:48
+info   SELECT * FROM content_page  29.06.2011 21:48
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:48
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:49
+info   INSERT INTO content_page(page_title, title, content, description) 
+                    VALUES("main", "Общая информация", "Общая информация о сайте", "<br />\r\n<b>Notice</b>:  Uninitialized string offset: 0 in <b>H:\\www\\eshop\\private\\smartytemplates\\templates_c\\d3e396bdb84539869b778f0705edc5d9c2d4a59e.file.content_page.tpl.php</b> on line <b>50</b><br />\r\n")  29.06.2011 21:49
+error   Can`t complit query: INSERT INTO content_page(page_title, title, content, description) 
+                    VALUES("main", "Общая информация", "Общая информация о сайте", "<br />\r\n<b>Notice</b>:  Uninitialized string offset: 0 in <b>H:\\www\\eshop\\private\\smartytemplates\\templates_c\\d3e396bdb84539869b778f0705edc5d9c2d4a59e.file.content_page.tpl.php</b> on line <b>50</b><br />\r\n") No error: 1054:: Error msg: Unknown column 'description' in 'field list' ;  29.06.2011 21:49
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:49
+info   SELECT * FROM content_page  29.06.2011 21:49
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:50
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:50
+info   INSERT INTO content_page(page_title, title, content, description) 
+                    VALUES("main", "Общая информация", "Общая информация о сайте\r\n", "")  29.06.2011 21:50
+error   Can`t complit query: INSERT INTO content_page(page_title, title, content, description) 
+                    VALUES("main", "Общая информация", "Общая информация о сайте\r\n", "") No error: 1054:: Error msg: Unknown column 'description' in 'field list' ;  29.06.2011 21:50
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:50
+info   SELECT * FROM content_page  29.06.2011 21:50
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   INSERT INTO content_page(page_title, title, content) 
+                    VALUES("main", "Общая информация о сайте", "Общая информация о сайте")  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   SELECT * FROM content_page  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   SELECT * FROM content_page WHERE id=1 OR page_title="1"  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   UPDATE content_page 
+                    SET page_title="main", title="Общая информация о сайте", 
+                        content="Общая информация о сайте" 
+                    WHERE id=1  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:51
+info   SELECT * FROM content_page  29.06.2011 21:51
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:56
+info   SELECT * FROM content_page  29.06.2011 21:56
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:56
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:56
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:59
+info   SELECT * FROM user  29.06.2011 21:59
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 21:59
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:01
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:01
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:01
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:02
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:02
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:02
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:06
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   INSERT INTO user(login, password, role) VALUES("ivan", "654", "customer")  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   SELECT * FROM user  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   INSERT INTO user(login, password, role) VALUES("test", "943test", "customer")  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   SELECT * FROM user  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   SELECT * FROM user WHERE login="test"  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:07
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   UPDATE user SET password="943test", role="customer"  WHERE login="test"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT * FROM user  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT * FROM user WHERE login="test"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   UPDATE user SET password="943test1", role="customer"  WHERE login="test"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT * FROM user  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT * FROM user WHERE login="test"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   UPDATE user SET password="943test", role="customer"  WHERE login="test"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT * FROM user  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:08
+info   SELECT password FROM user WHERE login="admin"  29.06.2011 22:09
