@@ -35,11 +35,11 @@
                 <td><input name="data[title]" value="{$product->title}" /></td>
             </tr>
             <tr>
-            <td>Рисунок</td>
-            <td>{if !empty($product->img)}<img src="{$siteurl}files/{$product->img->getName()}" /><br />
-                &nbsp;<a href="?page={$page}&action=del_img&id={$product->id}">удалить</a><br />{/if}
-                <input type="file"  name="img" /></td>
-        </tr>
+                <td>Рисунок</td>
+                <td>{if !empty($product->img)}<img src="{$siteurl}files/{$product->img->getName()}" /><br />
+                    &nbsp;<a href="?page={$page}&action=del_img&id={$product->id}">удалить</a><br />{/if}
+                    <input type="file"  name="img" /></td>
+            </tr>
             <tr>
                 <td>Рубрика</td>
                 <td><select name="data[rubric]">

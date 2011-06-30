@@ -118,6 +118,43 @@ if ($page == 'catalog') {
     } elseif ($action == 'del_rubric' && isset($_GET['id'])) {
         $o_rubric = Rubric::getInstanceById($_GET['id']);
         $o_rubric->deleteFromDb();
+        unset($o_rubric);
+        simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+        exit;
+    } elseif ($action == 'add_product') {
+        if (isset($_POST['data'])) {
+            $o_product = new Product();
+            $o_product->setTitle($_POST['data']['title']);
+            $o_product->setRubric($_POST['data']['rubric']);
+            $o_product->setShortText($_POST['data']['shot_text']);
+            $o_product->setFullText($_POST['data']['full_text']);
+            $o_product->insertToDb();
+            simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+            exit;
+        }
+
+        $o_smarty->assign('rubric_tree', $o_catalog->getRubricTree());
+        $o_smarty->assign('txt', 'Добавить товар');
+    } elseif ($action == 'edit_product' && isset($_GET['id'])) {
+        $o_product = Product::getInstanceById($_GET['id']);
+
+        if (isset($_POST['data'])) {
+            $o_product->setTitle($_POST['data']['title']);
+            $o_product->setRubric($_POST['data']['rubric']);
+            $o_product->setShortText($_POST['data']['shot_text']);
+            $o_product->setFullText($_POST['data']['full_text']);
+            $o_rubric->updateToDb();
+            simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+            exit;
+        }
+
+        $o_smarty->assign('product', $o_product);
+        $o_smarty->assign('rubric_tree', $o_catalog->getRubricTree());
+        $o_smarty->assign('txt', 'Редактировать товар');
+    } elseif ($action == 'del_product' && isset($_GET['id'])) {
+        $o_product = Product::getInstanceById($_GET['id']);
+        $o_product->deleteFromDb();
+        unset($o_product);
         simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
         exit;
     } else {
