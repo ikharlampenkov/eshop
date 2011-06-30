@@ -5,7 +5,7 @@ class mysqli_db_driver extends db_driver {
     private $_connect = null;
 
     public function __construct() {
-        
+
     }
 
     public function connect($dsn) {
@@ -73,6 +73,21 @@ class mysqli_db_driver extends db_driver {
             }
         } catch (simo_exception $s_e) {
             throw new simo_exception('Can`t return nextid for table ' . $table . ' and field ' . $idname);
+            return -1;
+        }
+    }
+
+    public function getLastInsertId() {
+        try {
+            $sql = 'SELECT LAST_INSERT_ID()';
+            $id = $this->query($sql);
+            if (isset($id[0][0])) {
+                return $id[0][0];
+            } else {
+                return 0;
+            }
+        } catch (simo_exception $s_e) {
+            throw new simo_exception('Can`t return last id');
             return -1;
         }
     }

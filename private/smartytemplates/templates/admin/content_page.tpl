@@ -5,7 +5,7 @@
 
 <h2>{$txt}</h2>
 
-<form action="?page={$page}&action={$action}{if edit}&id={$conpage.id}{/if}" method="post">
+<form action="?page={$page}&action={$action}{if $action=='edit'}&id={$conpage.id}{/if}" method="post">
     <table>
         <tr>
             <td width="200">Название страницы (англ)</td>

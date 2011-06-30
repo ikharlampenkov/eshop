@@ -47,10 +47,10 @@ if ($page == 'content_page') {
 }
 
 if ($page == 'user') {
-    
+
     $o_user = new share_user();
     $o_smarty->assign('role_list', $o_user->role_list);
-        
+
     if ($action == 'add') {
         if (isset($_POST['data'])) {
             $o_user->addUser($_POST['data']);
@@ -80,19 +80,53 @@ if ($page == 'user') {
 
 if ($page == 'catalog') {
     $o_catalog = new ProductCatalog();
-    
-    if (isset ($_GET['rubric'])) {
+
+    if (isset($_GET['rubric'])) {
         $cur_rubric = Rubric::getInstanceById($_GET['rubric']);
     } else {
         $cur_rubric = Rubric::getRootRubric();
     }
-    
+
     $o_smarty->assign('cur_rubric', $cur_rubric);
-    
-    $o_smarty->assign('rubric_list', $o_catalog->getAllRubric($cur_rubric->getId()));
-    
+
+    if ($action == 'add_rubric') {
+        if (isset($_POST['data'])) {
+            $o_rubric = new Rubric();
+            $o_rubric->setTitle($_POST['data']['title']);
+            $o_rubric->setParent($_POST['data']['parent']);
+            $o_rubric->insertToDb();
+            simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+            exit;
+        }
+
+        $o_smarty->assign('rubric_tree', $o_catalog->getRubricTree());
+        $o_smarty->assign('txt', 'Добавить рубрику');
+    } elseif ($action == 'edit_rubric' && isset($_GET['id'])) {
+        $o_rubric = Rubric::getInstanceById($_GET['id']);
+
+        if (isset($_POST['data'])) {
+            $o_rubric->setTitle($_POST['data']['title']);
+            $o_rubric->setParent($_POST['data']['parent']);
+            $o_rubric->updateToDb();
+            simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+            exit;
+        }
+
+        $o_smarty->assign('rubric', $o_rubric);
+        $o_smarty->assign('rubric_tree', $o_catalog->getRubricTree());
+        $o_smarty->assign('txt', 'Редактировать рубрику');
+    } elseif ($action == 'del_rubric' && isset($_GET['id'])) {
+        $o_rubric = Rubric::getInstanceById($_GET['id']);
+        $o_rubric->deleteFromDb();
+        simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+        exit;
+    } else {
+
+
+        $o_smarty->assign('rubric_list', $o_catalog->getAllRubric($cur_rubric->getId()));
+        $o_smarty->assign('product_list', $o_catalog->getAllProduct($cur_rubric->getId()));
+    }
 }
 
 $o_smarty->display('admin/index.tpl');
-
 ?>

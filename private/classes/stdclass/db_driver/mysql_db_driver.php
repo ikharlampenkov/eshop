@@ -7,7 +7,7 @@ class mysql_driver extends db_driver
  private $_connect = null;
 
  public function __construct() {}
- 
+
  public function connect($dsn)
  {
   if (is_array($dsn)) {
@@ -19,9 +19,9 @@ class mysql_driver extends db_driver
   	  throw new simo_exception('Can`t connect to host ' . $dsn['host'] . ' ' . $this->_getError());
   	  return false;
   	}
-  }	
+  }
  }
- 
+
  public function query($sql, $mode = 1)
  {
   $result = mysql_query($sql, $this->_connect);
@@ -35,10 +35,10 @@ class mysql_driver extends db_driver
   	throw new simo_exception('Can`t complit query: ' . $sql . ' ' . $this->_getError());
   	return false;
   }
-   	
+
  }
- 
- public function setDB($db_name) 
+
+ public function setDB($db_name)
  {
   if (mysql_select_db($db_name, $this->_connect)) {
   	return true;
@@ -47,7 +47,7 @@ class mysql_driver extends db_driver
   	return false;
   }
  }
- 
+
  public function setCharset($charset)
  {
   try {
@@ -57,7 +57,7 @@ class mysql_driver extends db_driver
   	return false;
   }
  }
-  
+
  public function prepareString($string)
  {
   $resultstr = mysql_real_escape_string($string, $this->_connect);
@@ -67,14 +67,14 @@ class mysql_driver extends db_driver
   	throw new simo_exception('Can`t preparestring ' . $string . ' ' . $this->_getError());
   }
  }
- 
+
  public function getNextId($table, $idname)
  {
   try {
     $sql = 'SELECT (max(' . $idname . ')+1) AS nextid FROM ' . $table;
     $id = $this->query($sql, 2);
     if (isset($id[0]['nextid'])) {
-      return $id[0]['nextid'];	
+      return $id[0]['nextid'];
     } else {
       return 1;
     }
@@ -83,14 +83,29 @@ class mysql_driver extends db_driver
   	return -1;
   }
  }
- 
+
+ public function getLastInsertId() {
+  try {
+    $sql = 'SELECT LAST_INSERT_ID()';
+    $id = $this->query($sql);
+    if (isset($id[0][0])) {
+      return $id[0][0];
+    } else {
+      return 0;
+    }
+  } catch (simo_exception $s_e) {
+  	throw new simo_exception('Can`t return last id');
+  	return -1;
+  }
+ }
+
  public function __destruct()
  {
   if (is_resource($this->_connect)) {
   	mysql_close($this->_connect);
   }
  }
- 
+
  private function _prepareSelectQuery($result, $mode)
  {
   if (mysql_num_rows($result) > 0) {
@@ -98,32 +113,32 @@ class mysql_driver extends db_driver
      switch ($mode) {
   		   case 1:
   		    	while ($row = mysql_fetch_row($result)) {
-  		    	  $_row[]=$row; 
+  		    	  $_row[]=$row;
   		    	}
   		   break;
   		   case 2:
   		    	while ($row=mysql_fetch_assoc($result)) {
-  		    	  $_row[]=$row;	
+  		    	  $_row[]=$row;
   		    	}
   		   break;
            case 3:
             	while ($row=mysql_fetch_object($result)) {
-            	  $_row[]=$row;	
+            	  $_row[]=$row;
             	}
   		   break;
      }
      mysql_free_result($result);
   	 return $_row;
-  } else return false;	
+  } else return false;
  }
- 
+
  private function _prepareAllQuery($result)
  {
   if (mysql_affected_rows($this->_connect) != -1) {
   	return true;
   } else return false;
  }
- 
+
  private function _getError()
  {
   if (is_resource($this->_connect)) {
@@ -133,7 +148,7 @@ class mysql_driver extends db_driver
   }
   return $resultstr;
  }
- 
+
 }
 
 ?>

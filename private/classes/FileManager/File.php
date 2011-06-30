@@ -112,6 +112,11 @@ class File {
 
 // end of member function getName
 
+    public function setName($value) {
+        $this->_name = $value;
+        $this->_ext = $this->extractExt($value);
+    }
+
     /**
      *
      *

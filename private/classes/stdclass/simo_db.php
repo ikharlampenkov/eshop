@@ -119,6 +119,18 @@ class simo_db {
         }
     }
 
+    public function getLastInsertID() {
+        try {
+            if (!$this->_conn) {
+                $this->connect();
+            }
+
+            return $this->_driver->getLastInsertId();
+        } catch (simo_exception $s_e) {
+            throw new Exception('Can`t get nextid ');
+        }
+    }
+
     public function setCharset($charset) {
         try {
             if (!$this->_conn) {
@@ -144,7 +156,7 @@ class simo_db {
     }
 
     private function __construct() {
-        
+
     }
 
     private function _prepareDSN($dsn) {
