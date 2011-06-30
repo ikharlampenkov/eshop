@@ -88,28 +88,23 @@
 
                                 {if $rubric_list}
 
-                                    <table>
-                                        {foreach from=$rubric_list item=rubric}
-                                            <tr>
-                                                <td><a href="?page={$page}&rubric={$rubric->getId()}">{$rubric->title}</a></td>
-                                            </tr>
-                                        {/foreach}
-                                    </table>
+                                    {foreach from=$rubric_list item=rubric}
+                                        <div><a href="?page={$page}&rubric={$rubric->getId()}">{$rubric->title}</a></div>
+                                    {/foreach}
+                                    
                                 {/if}
-
-                                <hr/>
-
-                                <h4>Товары</h4>
 
                                 {if $product_list}
 
                                     <table>
                                         {foreach from=$product_list item=product}
                                             <tr>
-                                                <td>{if $product->img->getName()}<img src="/files/{$product->img->getPreview()}" />{else}&nbsp;{/if}</td>
-                                                <td>{$product->title}</td>
-                                                <td>{$product->shortText}</td>
-                                                <td>{$product->price}</td>
+                                                <td width="110">{if $product->img->getName()}<img src="/files/{$product->img->getPreview()}" />{else}&nbsp;{/if}</td>
+                                                <td><div>{$product->title}</div>
+                                                    <div>{$product->shortText}</div>
+                                                    <div>{$product->fullText}</div>
+                                                    <div><b>Цена</b> {$product->price}</div>
+                                                </td>
                                             </tr>
                                         {/foreach}
                                     </table>

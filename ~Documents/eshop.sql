@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июн 30 2011 г., 00:35
+-- Время создания: Июн 30 2011 г., 23:44
 -- Версия сервера: 5.1.50
 -- Версия PHP: 5.3.5
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -25,7 +26,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Структура таблицы `content_page`
 --
 
-DROP TABLE IF EXISTS `content_page`;
 CREATE TABLE IF NOT EXISTS `content_page` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_title` varchar(40) NOT NULL COMMENT 'английское название для системы',
@@ -48,7 +48,6 @@ INSERT INTO `content_page` (`id`, `page_title`, `title`, `content`) VALUES
 -- Структура таблицы `order`
 --
 
-DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_login` varchar(10) NOT NULL,
@@ -70,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- Структура таблицы `order_product`
 --
 
-DROP TABLE IF EXISTS `order_product`;
 CREATE TABLE IF NOT EXISTS `order_product` (
   `order_id` int(10) unsigned NOT NULL,
   `product_id` int(10) unsigned NOT NULL,
@@ -89,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `order_product` (
 -- Структура таблицы `product`
 --
 
-DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_rubric_id` int(10) unsigned NOT NULL,
@@ -97,14 +94,18 @@ CREATE TABLE IF NOT EXISTS `product` (
   `img` varchar(255) DEFAULT NULL,
   `shot_text` varchar(255) DEFAULT NULL,
   `full_text` text,
+  `price` decimal(12,2) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_product_product_rubric1` (`product_rubric_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `product`
 --
 
+INSERT INTO `product` (`id`, `product_rubric_id`, `title`, `img`, `shot_text`, `full_text`, `price`) VALUES
+(1, 3, 'Апельсин', 'img_30-06-2011-21-19-07.jpg', 'Просто апельсин', 'Детальная информация об апельсинах', '100.00'),
+(3, 3, 'Вишня', 'img_30-06-2011-21-11-19.jpg', 'Просто вишня', 'Просто сладкая вишня', '250.00');
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Структура таблицы `product_rubric`
 --
 
-DROP TABLE IF EXISTS `product_rubric`;
 CREATE TABLE IF NOT EXISTS `product_rubric` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -120,14 +120,21 @@ CREATE TABLE IF NOT EXISTS `product_rubric` (
   `is_root` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_product_rubric_product_rubric` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `product_rubric`
 --
 
 INSERT INTO `product_rubric` (`id`, `title`, `parent_id`, `is_root`) VALUES
-(1, 'root', NULL, 1);
+(1, 'root', NULL, 1),
+(2, 'Продовольственные товары', 1, 0),
+(3, 'Фрукты', 2, 0),
+(4, 'Непродовольственные товары', 1, 0),
+(5, 'Бытовая химия', 4, 0),
+(6, 'Одежда', 4, 0),
+(7, 'Строительные материалы', 4, 0),
+(8, 'Овощи', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +142,6 @@ INSERT INTO `product_rubric` (`id`, `title`, `parent_id`, `is_root`) VALUES
 -- Структура таблицы `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `login` varchar(10) NOT NULL,
   `password` varchar(32) NOT NULL,
@@ -180,3 +186,4 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_rubric`
   ADD CONSTRAINT `fk_product_rubric_product_rubric` FOREIGN KEY (`parent_id`) REFERENCES `product_rubric` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+SET FOREIGN_KEY_CHECKS=1;

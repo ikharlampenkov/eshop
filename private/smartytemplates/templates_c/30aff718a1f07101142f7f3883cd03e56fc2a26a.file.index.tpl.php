@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-30 23:20:08
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-30 23:50:46
          compiled from "H:/www/eshop/private/smartytemplates/templates/customer/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:20264e0ca238233206-12421160%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:105824e0ca966009901-90381509%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '30aff718a1f07101142f7f3883cd03e56fc2a26a' => 
     array (
       0 => 'H:/www/eshop/private/smartytemplates/templates/customer/index.tpl',
-      1 => 1309450799,
+      1 => 1309452643,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20264e0ca238233206-12421160',
+  'nocache_hash' => '105824e0ca966009901-90381509',
   'function' => 
   array (
   ),
@@ -124,25 +124,18 @@ if ($_smarty_tpl->tpl_vars['prub']->total > 0){
 
                                 <?php if ($_smarty_tpl->getVariable('rubric_list')->value){?>
 
-                                    <table>
-                                        <?php  $_smarty_tpl->tpl_vars['rubric'] = new Smarty_Variable;
+                                    <?php  $_smarty_tpl->tpl_vars['rubric'] = new Smarty_Variable;
  $_from = $_smarty_tpl->getVariable('rubric_list')->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['rubric']->key => $_smarty_tpl->tpl_vars['rubric']->value){
 ?>
-                                            <tr>
-                                                <td><a href="?page=<?php echo $_smarty_tpl->getVariable('page')->value;?>
+                                        <div><a href="?page=<?php echo $_smarty_tpl->getVariable('page')->value;?>
 &rubric=<?php echo $_smarty_tpl->getVariable('rubric')->value->getId();?>
 "><?php echo $_smarty_tpl->getVariable('rubric')->value->title;?>
-</a></td>
-                                            </tr>
-                                        <?php }} ?>
-                                    </table>
+</a></div>
+                                    <?php }} ?>
+                                    
                                 <?php }?>
-
-                                <hr/>
-
-                                <h4>Товары</h4>
 
                                 <?php if ($_smarty_tpl->getVariable('product_list')->value){?>
 
@@ -153,14 +146,17 @@ if ($_smarty_tpl->_count($_from) > 0){
     foreach ($_from as $_smarty_tpl->tpl_vars['product']->key => $_smarty_tpl->tpl_vars['product']->value){
 ?>
                                             <tr>
-                                                <td><?php if ($_smarty_tpl->getVariable('product')->value->img->getName()){?><img src="/files/<?php echo $_smarty_tpl->getVariable('product')->value->img->getPreview();?>
+                                                <td width="110"><?php if ($_smarty_tpl->getVariable('product')->value->img->getName()){?><img src="/files/<?php echo $_smarty_tpl->getVariable('product')->value->img->getPreview();?>
 " /><?php }else{ ?>&nbsp;<?php }?></td>
-                                                <td><?php echo $_smarty_tpl->getVariable('product')->value->title;?>
-</td>
-                                                <td><?php echo $_smarty_tpl->getVariable('product')->value->shortText;?>
-</td>
-                                                <td><?php echo $_smarty_tpl->getVariable('product')->value->price;?>
-</td>
+                                                <td><div><?php echo $_smarty_tpl->getVariable('product')->value->title;?>
+</div>
+                                                    <div><?php echo $_smarty_tpl->getVariable('product')->value->shortText;?>
+</div>
+                                                    <div><?php echo $_smarty_tpl->getVariable('product')->value->fullText;?>
+</div>
+                                                    <div><b>Цена</b> <?php echo $_smarty_tpl->getVariable('product')->value->price;?>
+</div>
+                                                </td>
                                             </tr>
                                         <?php }} ?>
                                     </table>
