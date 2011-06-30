@@ -128,6 +128,7 @@ if ($page == 'catalog') {
             $o_product->setRubric($_POST['data']['rubric']);
             $o_product->setShortText($_POST['data']['shot_text']);
             $o_product->setFullText($_POST['data']['full_text']);
+            $o_product->setPrice($_POST['data']['price']);
             $o_product->insertToDb();
             simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
             exit;
@@ -143,7 +144,8 @@ if ($page == 'catalog') {
             $o_product->setRubric($_POST['data']['rubric']);
             $o_product->setShortText($_POST['data']['shot_text']);
             $o_product->setFullText($_POST['data']['full_text']);
-            $o_rubric->updateToDb();
+            $o_product->setPrice($_POST['data']['price']);
+            $o_product->updateToDb();
             simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
             exit;
         }
@@ -157,11 +159,17 @@ if ($page == 'catalog') {
         unset($o_product);
         simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
         exit;
+    } elseif ($action == 'del_img' && isset($_GET['id'])) {
+        $o_product = Product::getInstanceById($_GET['id']);
+        $o_product->deleteImg();
+        simo_functions::chLocation('?page=' . $page . '&rubric=' . $cur_rubric->id);
+        exit;
     } else {
 
 
         $o_smarty->assign('rubric_list', $o_catalog->getAllRubric($cur_rubric->getId()));
         $o_smarty->assign('product_list', $o_catalog->getAllProduct($cur_rubric->getId()));
+        $o_smarty->assign('path', $cur_rubric->getPathToRubric());
     }
 }
 

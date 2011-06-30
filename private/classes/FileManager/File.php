@@ -50,7 +50,7 @@ class File {
         $this->_name = $name;
 
         if (!empty($this->_name)) {
-            $this->_ext = $this->extractExt();
+            $this->_ext = $this->extractExt($this->_name);
         }
     }
 

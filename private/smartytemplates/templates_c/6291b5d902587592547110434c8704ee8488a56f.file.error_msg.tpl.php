@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-29 21:38:28
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-30 20:33:15
          compiled from "H:/www/eshop/private/smartytemplates/templates/error_msg.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:241644e0b38e416f5f0-54174694%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:136104e0c7b1b40b683-71402768%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '241644e0b38e416f5f0-54174694',
+  'nocache_hash' => '136104e0c7b1b40b683-71402768',
   'function' => 
   array (
   ),

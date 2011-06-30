@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-29 21:56:38
+<?php /* Smarty version Smarty-3.0.7, created on 2011-06-30 23:02:04
          compiled from "H:/www/eshop/private/smartytemplates/templates/admin/content_page.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:180364e0b3d2649b9b1-18768149%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:170444e0c9dfc2315b8-56659240%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd3e396bdb84539869b778f0705edc5d9c2d4a59e' => 
     array (
       0 => 'H:/www/eshop/private/smartytemplates/templates/admin/content_page.tpl',
-      1 => 1309359131,
+      1 => 1309436071,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '180364e0b3d2649b9b1-18768149',
+  'nocache_hash' => '170444e0c9dfc2315b8-56659240',
   'function' => 
   array (
   ),
@@ -27,7 +27,7 @@ $_smarty_tpl->decodeProperties(array (
 
 <form action="?page=<?php echo $_smarty_tpl->getVariable('page')->value;?>
 &action=<?php echo $_smarty_tpl->getVariable('action')->value;?>
-<?php if ('edit'){?>&id=<?php echo $_smarty_tpl->getVariable('conpage')->value['id'];?>
+<?php if ($_smarty_tpl->getVariable('action')->value=='edit'){?>&id=<?php echo $_smarty_tpl->getVariable('conpage')->value['id'];?>
 <?php }?>" method="post">
     <table>
         <tr>
