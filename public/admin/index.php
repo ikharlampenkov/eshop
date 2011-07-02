@@ -126,7 +126,7 @@ if ($page == 'catalog') {
             $o_product = new Product();
             $o_product->setTitle($_POST['data']['title']);
             $o_product->setRubric($_POST['data']['rubric']);
-            $o_product->setShortText($_POST['data']['shot_text']);
+            $o_product->setShortText($_POST['data']['short_text']);
             $o_product->setFullText($_POST['data']['full_text']);
             $o_product->setPrice($_POST['data']['price']);
             $o_product->insertToDb();
@@ -142,7 +142,7 @@ if ($page == 'catalog') {
         if (isset($_POST['data'])) {
             $o_product->setTitle($_POST['data']['title']);
             $o_product->setRubric($_POST['data']['rubric']);
-            $o_product->setShortText($_POST['data']['shot_text']);
+            $o_product->setShortText($_POST['data']['short_text']);
             $o_product->setFullText($_POST['data']['full_text']);
             $o_product->setPrice($_POST['data']['price']);
             $o_product->updateToDb();

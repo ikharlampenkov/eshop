@@ -39,14 +39,14 @@
     <body>
         {include file="error_msg.tpl"}
 
-        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="1">
+        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
             {*up*}
             <tr>
                 <td valign="top" height="150">
 
                     <table width="100%" height="150" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                            <td>Электронный магазин</td>
+                            <td> <div>{$conpage.content}</div> </td>
                             <td width="300">
 
                                 <div>{$user}</div> <a href="{$siteurl}?logout">Выйти</a>
@@ -64,13 +64,6 @@
                 <td>
 
                     <table border="1" width="100%">
-                        <tr>
-                            <td colspan="2">
-
-                                <div>{$conpage.content}</div>
-
-                            </td>
-                        </tr>
                         <tr>
                             <td>
 

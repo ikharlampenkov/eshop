@@ -55,7 +55,7 @@
             </tr>
             <tr>
                 <td>Текст</td>
-                <td><textarea name="data[shot_text]">{$product->shortText}</textarea></td>
+                <td><textarea name="data[short_text]">{$product->shortText}</textarea></td>
             </tr>
             <tr>
                 <td>Полный текст</td>

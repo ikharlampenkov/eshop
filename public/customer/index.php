@@ -32,5 +32,9 @@ $o_smarty->assign('path', $cur_rubric->getPathToRubric());
 $o_content_page = new gkh_content_page();
 $o_smarty->assign('conpage', $o_content_page->getContentPage('main'));
 
+$o_order = new Order();
+$o_order->user = simo_session::getVar('login', 'user');
+$o_order->restoreFromSession();
+
 $o_smarty->display('customer/index.tpl');
 ?>

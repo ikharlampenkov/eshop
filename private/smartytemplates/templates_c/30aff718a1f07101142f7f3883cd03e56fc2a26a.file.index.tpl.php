@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-06-30 23:50:46
+<?php /* Smarty version Smarty-3.0.7, created on 2011-07-02 17:21:35
          compiled from "H:/www/eshop/private/smartytemplates/templates/customer/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:105824e0ca966009901-90381509%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:239204e0ef12f3020f0-46122064%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '30aff718a1f07101142f7f3883cd03e56fc2a26a' => 
     array (
       0 => 'H:/www/eshop/private/smartytemplates/templates/customer/index.tpl',
-      1 => 1309452643,
+      1 => 1309602092,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '105824e0ca966009901-90381509',
+  'nocache_hash' => '239204e0ef12f3020f0-46122064',
   'function' => 
   array (
   ),
@@ -62,13 +62,14 @@ $_smarty_tpl->decodeProperties(array (
         <?php $_template = new Smarty_Internal_Template("error_msg.tpl", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate();?><?php unset($_template);?>
 
-        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="1">
+        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td valign="top" height="150">
 
                     <table width="100%" height="150" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                            <td>Электронный магазин</td>
+                            <td> <div><?php echo $_smarty_tpl->getVariable('conpage')->value['content'];?>
+</div> </td>
                             <td width="300">
 
                                 <div><?php echo $_smarty_tpl->getVariable('user')->value;?>
@@ -86,14 +87,6 @@ $_smarty_tpl->decodeProperties(array (
                 <td>
 
                     <table border="1" width="100%">
-                        <tr>
-                            <td colspan="2">
-
-                                <div><?php echo $_smarty_tpl->getVariable('conpage')->value['content'];?>
-</div>
-
-                            </td>
-                        </tr>
                         <tr>
                             <td>
 
