@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+tr {
+    vertical-align: top;
+}
+
+input {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+}
+
+#save {
+    width: 100px;
+}
+
+
+

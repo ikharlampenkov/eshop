@@ -15,6 +15,12 @@ if (isset($_GET['action'])) {
 $o_smarty->assign('page', $page);
 $o_smarty->assign('action', $action);
 
+if (simo_session::existVar('isComplite', 'order')) {
+    $isComplite = simo_session::getVar('isComplite', 'order');
+} else {
+    $isComplite = false;
+}
+
 $o_catalog = new ProductCatalog();
 
 if (isset($_GET['rubric'])) {
@@ -33,8 +39,13 @@ $o_content_page = new gkh_content_page();
 $o_smarty->assign('conpage', $o_content_page->getContentPage('main'));
 
 $o_order = new Order();
-$o_order->user = simo_session::getVar('login', 'user');
+$o_order->setUser(simo_session::getVar('login', 'user'));
 $o_order->restoreFromSession();
+
+$o_smarty->assign('chart_list', $o_order->getProductList());
+$o_smarty->assign('summ', $o_order->getSumm());
+
+$o_smarty->assign('isComplite', $isComplite);
 
 $o_smarty->display('customer/index.tpl');
 ?>

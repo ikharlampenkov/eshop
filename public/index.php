@@ -19,12 +19,14 @@ if ($o_fmuser->isLogin()) {
         include_once $_SERVER['DOCUMENT_ROOT'] . '/admin/index.php';
     } elseif ($o_fmuser->getUserRole() == share_user::UT_CUSTOMER) {
         include_once $_SERVER['DOCUMENT_ROOT'] . '/customer/index.php';
+    } elseif ($o_fmuser->getUserRole() == share_user::UT_DESTROYER) {
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/destroyer/index.php';
     } else {
         
     }
 } else {
     $o_smarty->assign('login', false);
-    
+
     if (isset($_POST['login']) && isset($_POST['psw'])) {
         if ($o_fmuser->logIn($_POST['login'], $_POST['psw'])) {
             header("Location: /");

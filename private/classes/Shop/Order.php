@@ -85,7 +85,7 @@ class Order {
     }
 
     public function setDiscount($value) {
-        $this->_id = str_replace(',', '.', $value);
+        $this->_discount = str_replace(',', '.', $value);
         ;
     }
 
@@ -102,9 +102,13 @@ class Order {
     public function insertToDb() {
         global $__cfg;
         try {
-            $sql = 'INSERT INTO order (user_login, date, discount, is_complite)
-                    VALUES (' . $this->_user . ', "' . $this->_date . '", ' . $this->_discount . ', ' . $this->_isComplite . ')';
+            $sql = 'INSERT INTO `order` (user_login, date, discount, is_complite)
+                    VALUES ("' . $this->_user . '", "' . $this->_date . '", ' . $this->_discount . ', ' . $this->_isComplite . ')';
             $this->_db->query($sql);
+
+            $this->_id = $this->_db->getLastInsertId();
+
+            $this->_saveProductListToDb();
         } catch (Exception $e) {
             simo_exception::registrMsg($e, $this->_debug);
             return null;
@@ -113,11 +117,13 @@ class Order {
 
     public function updateToDb() {
         try {
-            $sql = 'UPDATE order
-                    SET user_login=' . $this->_user . ', date="' . $this->_date . '",
+            $sql = 'UPDATE `order`
+                    SET user_login="' . $this->_user . '", date="' . $this->_date . '",
                         discount=' . $this->_discount . ', is_complite="' . $this->_isComplite . '" 
                     WHERE id=' . $this->_id;
             $this->_db->query($sql);
+
+            $this->_saveProductListToDb();
         } catch (Exception $e) {
             simo_exception::registrMsg($e, $this->_debug);
             return null;
@@ -126,19 +132,42 @@ class Order {
 
     public function deleteFromDb() {
         try {
-            $this->_img->delete();
+            $this->_deleteproductListFromDb();
 
-            $sql = 'DELETE FROM order WHERE id=' . $this->_id;
+            $sql = 'DELETE FROM `order` WHERE id=' . $this->_id;
             $this->_db->query($sql);
         } catch (Exception $e) {
             simo_exception::registrMsg($e, $this->_debug);
+        }
+    }
+    
+    private function _saveProductListToDb() {
+        if (!empty($this->_productList)) {
+            foreach ($this->_productList as $item) {
+                $sql = 'DELETE FROM order_product WHERE order_id=' . $this->_id . ' AND product_id=' . $item['product']->id;
+                $this->_db->query($sql);
+
+                if ($item['count'] > 0) {
+                    $sql = 'INSERT INTO order_product(order_id, product_id, count) VALUES(' . $this->_id . ', ' . $item['product']->id . ', ' . $item['count'] . ')';
+                    $this->_db->query($sql);
+                }
+            }
+        }
+    }
+    
+    private function _deleteproductListFromDb() {
+        if (!empty($this->_productList)) {
+           $sql = 'DELETE FROM order_product WHERE order_id=' . $this->_id;
+           $this->_db->query($sql);
+           
+           $this->_productList = array();
         }
     }
 
     public static function getInstanceById($id) {
         try {
             $db = simo_db::getInstance();
-            $result = $db->query('SELECT * FROM order WHERE id=' . $id, simo_db::QUERY_MOD_ASSOC);
+            $result = $db->query('SELECT * FROM `order` WHERE id=' . $id, simo_db::QUERY_MOD_ASSOC);
             if (isset($result[0])) {
                 $o = new Order();
                 $o->assignByHash($result[0]);
@@ -179,14 +208,14 @@ class Order {
     }
 
     public function restoreFromSession() {
-        if (simo_session::existVar('date', 'order')) { 
+        if (simo_session::existVar('date', 'order')) {
             $this->_date = simo_session::getVar('date', 'order');
             $this->_user = simo_session::getVar('user', 'order');
-            
+
             foreach (simo_session::getVar('productList', 'order') as $item) {
-                $this->_productList[] = array('product' => Product::getInstanceById($tem['product']), 'count' => $tem['count']);
-            }   
-        }    
+                $this->_productList[] = array('product' => Product::getInstanceById($item['product']), 'count' => $item['count']);
+            }
+        }
     }
 
     public function saveToSession() {
@@ -197,11 +226,11 @@ class Order {
             simo_session::setVar('date', $this->_date, 'order');
             simo_session::setVar('user', $this->_user, 'order');
         }
-            $temp_list = array();
-            foreach($this->_productList as $item) {
-                $temp_list[] = array('product' => $item['product']->id, 'count' => $item['count']);
-            }
-            simo_session::setVar('productList', $temp_list, 'order');        
+        $temp_list = array();
+        foreach ($this->_productList as $item) {
+            $temp_list[] = array('product' => $item['product']->id, 'count' => $item['count']);
+        }
+        simo_session::setVar('productList', $temp_list, 'order');
     }
 
     public function addProduct($product, $count) {
@@ -214,13 +243,47 @@ class Order {
         $this->saveToSession();
     }
 
+    public function changeProduct($product, $count) {
+        $key = $this->_searchProduct($product);
+        if ($key !== false) {
+            if ($count > 0) {
+                $this->_productList[$key]['count'] = $count;
+            } else {
+                unset($this->_productList[$key]);
+            }
+        }
+        $this->saveToSession();
+    }
+
     private function _searchProduct($product) {
         foreach ($this->_productList as $key => $prd) {
-            if ($prd->id == $product) {
+            if ($prd['product']->id == $product) {
                 return $key;
             }
         }
         return false;
+    }
+
+    public function getSumm() {
+        if (!empty($this->_productList)) {
+            $summ = 0;
+            foreach ($this->_productList as $item) {
+                $summ += $item['product']->price * $item['count'];
+            }
+            return $summ;
+        } else
+            return 0;
+    }
+    
+    public function getSummWithDiscount() {
+        if (!empty($this->_productList)) {
+            $summ = 0;
+            foreach ($this->_productList as $item) {
+                $summ += $item['product']->price * $item['count'];
+            }
+            return $summ - $this->_discount;
+        } else
+            return 0;
     }
 
 }

@@ -7,30 +7,11 @@
         <meta name="author-corporate" content=""></meta>
         <meta name="publisher-email" content=""></meta>
 
-        <style type="text/css">
-            table {
-    width: 100%;
-            }
+        <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="/css/user.css" />
 
-            tr {
-   vertical-align: top;
-            }
-
-            input {
-    width: 100%;
-            }
-
-            textarea {
-    width: 100%;
-    height: 200px;
-            }
-
-            #save {
-    width: 100px;
-            }
-
-        </style>
-
+        <script type="text/javascript" language="javascript" src="/js/jquery.min.js" ></script>
+        <script type="text/javascript" language="javascript" src="/js/jquery-ui.min.js" ></script>
         <script type="text/javascript" language="javascript" src="/js/main.js" ></script>
 
         <title>{$title}</title>
@@ -84,7 +65,7 @@
                                     {foreach from=$rubric_list item=rubric}
                                         <div><a href="?page={$page}&rubric={$rubric->getId()}">{$rubric->title}</a></div>
                                     {/foreach}
-                                    
+
                                 {/if}
 
                                 {if $product_list}
@@ -98,6 +79,7 @@
                                                     <div>{$product->fullText}</div>
                                                     <div><b>Цена</b> {$product->price}</div>
                                                 </td>
+                                                <td><input type="text" id="product_{$product->id}" name="product_{$product->id}" value=""/> <button onclick="addToChart({$product->id})">Заказать</button></td>
                                             </tr>
                                         {/foreach}
                                     </table>
@@ -108,6 +90,7 @@
                             <td width="230">
                                 <div>Корзина</div>
 
+                                <div id="chart_content">{include file="customer/chart.tpl"} </div>
 
                             </td>
                         </tr>

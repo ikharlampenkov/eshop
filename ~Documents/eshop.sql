@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июн 30 2011 г., 23:44
+-- Время создания: Июл 03 2011 г., 22:28
 -- Версия сервера: 5.1.50
 -- Версия PHP: 5.3.5
 
@@ -26,6 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Структура таблицы `content_page`
 --
 
+DROP TABLE IF EXISTS `content_page`;
 CREATE TABLE IF NOT EXISTS `content_page` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_title` varchar(40) NOT NULL COMMENT 'английское название для системы',
@@ -48,6 +49,7 @@ INSERT INTO `content_page` (`id`, `page_title`, `title`, `content`) VALUES
 -- Структура таблицы `order`
 --
 
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_login` varchar(10) NOT NULL,
@@ -56,12 +58,16 @@ CREATE TABLE IF NOT EXISTS `order` (
   `is_complite` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_order_user1` (`user_login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `order`
 --
 
+INSERT INTO `order` (`id`, `user_login`, `date`, `discount`, `is_complite`) VALUES
+(1, 'ivan', '2011-07-03 00:00:00', '0.00', 0),
+(2, 'ivan', '2011-07-03 00:00:00', '150.00', 1),
+(3, 'ivan', '2011-07-03 00:00:00', '0.00', 0);
 
 -- --------------------------------------------------------
 
@@ -69,9 +75,11 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- Структура таблицы `order_product`
 --
 
+DROP TABLE IF EXISTS `order_product`;
 CREATE TABLE IF NOT EXISTS `order_product` (
   `order_id` int(10) unsigned NOT NULL,
   `product_id` int(10) unsigned NOT NULL,
+  `count` int(10) unsigned NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
   KEY `fk_order_product_product1` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -80,6 +88,12 @@ CREATE TABLE IF NOT EXISTS `order_product` (
 -- Дамп данных таблицы `order_product`
 --
 
+INSERT INTO `order_product` (`order_id`, `product_id`, `count`) VALUES
+(1, 1, 3),
+(2, 1, 8),
+(2, 3, 1),
+(3, 1, 8),
+(3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -87,23 +101,24 @@ CREATE TABLE IF NOT EXISTS `order_product` (
 -- Структура таблицы `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_rubric_id` int(10) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `img` varchar(255) DEFAULT NULL,
-  `shot_text` varchar(255) DEFAULT NULL,
+  `short_text` varchar(255) DEFAULT NULL,
   `full_text` text,
   `price` decimal(12,2) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_product_product_rubric1` (`product_rubric_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`id`, `product_rubric_id`, `title`, `img`, `shot_text`, `full_text`, `price`) VALUES
+INSERT INTO `product` (`id`, `product_rubric_id`, `title`, `img`, `short_text`, `full_text`, `price`) VALUES
 (1, 3, 'Апельсин', 'img_30-06-2011-21-19-07.jpg', 'Просто апельсин', 'Детальная информация об апельсинах', '100.00'),
 (3, 3, 'Вишня', 'img_30-06-2011-21-11-19.jpg', 'Просто вишня', 'Просто сладкая вишня', '250.00');
 
@@ -113,6 +128,7 @@ INSERT INTO `product` (`id`, `product_rubric_id`, `title`, `img`, `shot_text`, `
 -- Структура таблицы `product_rubric`
 --
 
+DROP TABLE IF EXISTS `product_rubric`;
 CREATE TABLE IF NOT EXISTS `product_rubric` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -142,6 +158,7 @@ INSERT INTO `product_rubric` (`id`, `title`, `parent_id`, `is_root`) VALUES
 -- Структура таблицы `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `login` varchar(10) NOT NULL,
   `password` varchar(32) NOT NULL,
@@ -155,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`login`, `password`, `role`) VALUES
 ('admin', '123', 'admin'),
+('dest', '000000', 'destroyer'),
 ('ivan', '654', 'customer'),
 ('test', '943test', 'customer');
 

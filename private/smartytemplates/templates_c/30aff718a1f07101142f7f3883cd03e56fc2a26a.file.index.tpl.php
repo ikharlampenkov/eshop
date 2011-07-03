@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-07-02 17:21:35
+<?php /* Smarty version Smarty-3.0.7, created on 2011-07-03 17:10:25
          compiled from "H:/www/eshop/private/smartytemplates/templates/customer/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:239204e0ef12f3020f0-46122064%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:236704e1040118df6b5-41062559%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '30aff718a1f07101142f7f3883cd03e56fc2a26a' => 
     array (
       0 => 'H:/www/eshop/private/smartytemplates/templates/customer/index.tpl',
-      1 => 1309602092,
+      1 => 1309687821,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '239204e0ef12f3020f0-46122064',
+  'nocache_hash' => '236704e1040118df6b5-41062559',
   'function' => 
   array (
   ),
@@ -28,30 +28,11 @@ $_smarty_tpl->decodeProperties(array (
         <meta name="author-corporate" content=""></meta>
         <meta name="publisher-email" content=""></meta>
 
-        <style type="text/css">
-            table {
-    width: 100%;
-            }
+        <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="/css/user.css" />
 
-            tr {
-   vertical-align: top;
-            }
-
-            input {
-    width: 100%;
-            }
-
-            textarea {
-    width: 100%;
-    height: 200px;
-            }
-
-            #save {
-    width: 100px;
-            }
-
-        </style>
-
+        <script type="text/javascript" language="javascript" src="/js/jquery.min.js" ></script>
+        <script type="text/javascript" language="javascript" src="/js/jquery-ui.min.js" ></script>
         <script type="text/javascript" language="javascript" src="/js/main.js" ></script>
 
         <title><?php echo $_smarty_tpl->getVariable('title')->value;?>
@@ -127,7 +108,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 "><?php echo $_smarty_tpl->getVariable('rubric')->value->title;?>
 </a></div>
                                     <?php }} ?>
-                                    
+
                                 <?php }?>
 
                                 <?php if ($_smarty_tpl->getVariable('product_list')->value){?>
@@ -150,6 +131,10 @@ if ($_smarty_tpl->_count($_from) > 0){
                                                     <div><b>Цена</b> <?php echo $_smarty_tpl->getVariable('product')->value->price;?>
 </div>
                                                 </td>
+                                                <td><input type="text" id="product_<?php echo $_smarty_tpl->getVariable('product')->value->id;?>
+" name="product_<?php echo $_smarty_tpl->getVariable('product')->value->id;?>
+" value=""/> <button onclick="addToChart(<?php echo $_smarty_tpl->getVariable('product')->value->id;?>
+)">Заказать</button></td>
                                             </tr>
                                         <?php }} ?>
                                     </table>
@@ -160,6 +145,8 @@ if ($_smarty_tpl->_count($_from) > 0){
                             <td width="230">
                                 <div>Корзина</div>
 
+                                <div id="chart_content"><?php $_template = new Smarty_Internal_Template("customer/chart.tpl", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
+ echo $_template->getRenderedTemplate();?><?php unset($_template);?> </div>
 
                             </td>
                         </tr>

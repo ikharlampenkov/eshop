@@ -4,7 +4,7 @@
 
     <h2>{$txt}</h2>
 
-    <form action="?page={$page}&action={$action}{if $action=='edit_rubric'}&id={$rubric.id}{/if}&rubric={$cur_rubric->getId()}" method="post">
+    <form action="?page={$page}&action={$action}{if $action=='edit_rubric'}&id={$rubric->id}{/if}&rubric={$cur_rubric->getId()}" method="post">
         <table>
             <tr>
                 <td width="200">Название</td>

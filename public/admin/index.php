@@ -173,5 +173,39 @@ if ($page == 'catalog') {
     }
 }
 
+if ($page == 'order') {
+    
+    $o_catalog = new ProductCatalog();
+    
+    
+    
+    if ($action == 'edit' && isset($_GET['id'])) {
+        $o_order = Order::getInstanceById($_GET['id']);
+
+        if (isset($_POST['data'])) {
+            $o_order->setDiscount($_POST['data']['discount']);
+            $o_order->setIsComplite($_POST['data']['is_complite']);
+            
+            $o_order->updateToDb();
+            simo_functions::chLocation('?page=' . $page);
+            exit;
+        }
+
+        $o_user = new share_user();
+        $o_smarty->assign('user_list', $o_user->getAllUser());
+        
+        $o_smarty->assign('order', $o_order);
+        $o_smarty->assign('txt', 'Редактировать заказ');
+    } elseif ($action == 'del' && isset($_GET['id'])) {
+        $o_order = Order::getInstanceById($_GET['id']);
+        $o_order->deleteFromDb();
+        unset($o_product);
+        simo_functions::chLocation('?page=' . $page);
+        exit;
+    } else {
+        $o_smarty->assign('order_list', $o_catalog->getAllOrder());        
+    }
+}
+
 $o_smarty->display('admin/index.tpl');
 ?>

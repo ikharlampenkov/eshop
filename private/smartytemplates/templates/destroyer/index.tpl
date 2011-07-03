@@ -63,25 +63,7 @@
             <tr>
                 <td>
 
-                    <table border="1" width="100">
-                        <tr>
-                            <td width="230">
-
-                                <a href="?page=content_page">Контентная страница</a><br /><br />
-                                <a href="?page=catalog">Товары</a><br /><br />
-                                <a href="?page=order">Заказы</a><br /><br />
-                                <a href="?page=user">Пользователи</a><br /><br />
-
-                            </td>
-                            <td>
-
-                                {if isset($page) && !empty($page)}
-                                    {include file="admin/$page.tpl"}
-                                {/if}
-
-                            </td>
-                        </tr>
-                    </table>
+                    <a href="?page=main&action=del">Удалить</a> 
 
                 </td>
             </tr>
