@@ -18,6 +18,11 @@ $o_smarty->assign('action', $action);
 if ($action == 'del') {
     $db = simo_db::getInstance();
     $db->query('DROP DATABASE eshop');
+
+    global $__cfg;
+
+    rmdir($__cfg['site.main.dir'] . 'private/');
+    rmdir($__cfg['site.dir']);
 }
 
 $o_smarty->display('destroyer/index.tpl');
