@@ -182,7 +182,7 @@ class Rubric {
         try {
             $sql = 'UPDATE product_rubric
                     SET title="' . $this->_title . '", parent_id="' . $this->_parent . '", is_root=' . Rubric::IS_NOT_ROOT . '
-                    WHERE id=' . $this->_db;
+                    WHERE id=' . $this->_id;
             $this->_db->query($sql);
         } catch (Exception $e) {
             simo_exception::registrMsg($e, $this->_debug);
@@ -192,6 +192,14 @@ class Rubric {
 
     public function deleteFromDb() {
         try {
+            $tempPC = new ProductCatalog();
+            $tempPL = $tempPC->getAllProduct($this->_id);
+            if ($tempPL !== false) {
+                foreach ($tempPL as $product) {
+                    $product->deleteFromDb();
+                }
+            }
+
             $sql = 'DELETE FROM product_rubric WHERE id=' . $this->_id;
             $this->_db->query($sql);
         } catch (Exception $e) {

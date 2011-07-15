@@ -8,6 +8,9 @@
         <meta name="publisher-email" content=""></meta>
 
         <style >
+			body {
+				font-family:tahoma;
+			}
             input {
     width: 99%;
             }
@@ -32,24 +35,19 @@
 
         {if $login==false}
 
-            <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
+            <table width="100%" height="100%" cellpadding="10" cellspacing="10" border="0">
                 <tr>
                     <td valign="middle" align="center">
 
-                        <table height="100" width="300" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td>
-                                        <div style="border:1px solid black; width:250px; height:100px; padding:10px; text-align:left;">
-                                        {if isset($login_fail)}<div style="color:red; font-weight:bold; font-size:12px;">Вы ввели неправильный логин и пароль!</div>{/if}
-                                        <form method="post" style="margin:0px; padding:0px;">
-                                            <div><span style="width:70px">Логин: </span><input name="login" type="text" style="width:150px;"></div>
-                                            <div><span style="width:70px">Пароль: </span><input name="psw" type="password" style="width:150px;"></div>
-                                            <div><input type="submit" value="Войти" style="width:70px;"></div>
-                                        </form>
-                                </div>
-
-                            </td>
-                        </tr>
+                        <table height="100" width="300" cellpadding="10" cellspacing="0" border="0" style="background-color:#69aefc">
+                        <form method="post" style="margin:0px; padding:0px;">
+                            <tr><td></td><td style="font-size:26px; color: white;padding-left: 25px;">eSHOP</td></tr>
+                            <tr><td style="color:white">Логин: </td><td><input name="login" type="text" style="width:190px;border:10px;font-size: 16px;"></td></tr>
+                            <tr><td style="color:white">Пароль:</td><td><input name="psw" type="password" style="width:190px;border:10px;font-size: 16px;"></td></tr>
+                            <tr><td>&nbsp;</td><td><input type="submit" value="Войти" style="width:190px;font-size: 16px;"></td></tr>     
+                            <tr><td></td><td>{if isset($login_fail)}<div style="color:white; font-weight:bold; font-size:12px;">Невервный логин и пароль.</div>{/if}</td></tr>
+                                  
+						</form>
                     </table>
 
 

@@ -91,9 +91,11 @@ class File {
      * @access public
      */
     public function delete() {
-        $result = unlink($this->_path . $this->_name);
-        if ($result === false) {
-            throw new Exception('Can not delete file ' . $this->_name);
+        if (!empty($this->_name)) {
+            $result = unlink($this->_path . $this->_name);
+            if ($result === false) {
+                throw new Exception('Can not delete file ' . $this->_name);
+            }
         }
     }
 
