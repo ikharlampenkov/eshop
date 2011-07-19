@@ -90,7 +90,7 @@
                 <tr>
                     <td class="ttovar" valign="middle"><a href="?page={$page}&rubric={$rubric->getId()}" class="rmenu">{$rubric->title}</a></td>
                     <td class="tedit"  valign="middle"><a href="?page={$page}&action=edit_rubric&id={$rubric->getId()}&rubric={$cur_rubric->getId()}" class="tedit">редактировать</a></td>
-                    <td class="tdel"  valign="middle"><a href="?page={$page}&action=del_rubric&id={$rubric->getId()}&rubric={$cur_rubric->getId()}" style="color:#830000">удалить</a></td>
+                    <td class="tdel"  valign="middle"><a href="?page={$page}&action=del_rubric&id={$rubric->getId()}&rubric={$cur_rubric->getId()}" onclick="return confirmDelete('{$rubric->title}');" style="color:#830000">удалить</a></td>
                 </tr>
             {/foreach}
         </table>
@@ -107,7 +107,8 @@
                     <td class="ttovar" >{$product->title}</td>
                     <td class="ttovar" >{$product->shortText}</td>
                     <td class="ttovar" >{$product->price}</td>
-                    <td class="tedit" ><a href="?page={$page}&action=edit_product&id={$product->getId()}&rubric={$cur_rubric->getId()}">редактировать</a><br /><a href="?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}" onclick="return confirmDelete('{$product->title}'{*, '?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}'*});" style="color: #830000">удалить</a> </td>
+                    <td class="tedit" ><a href="?page={$page}&action=edit_product&id={$product->getId()}&rubric={$cur_rubric->getId()}">редактировать</a><br />
+                                       <a href="?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}" onclick="return confirmDelete('{$product->title}');" style="color: #830000">удалить</a> </td>
                 </tr>
             {/foreach}
             {/if}

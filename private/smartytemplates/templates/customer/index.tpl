@@ -103,6 +103,18 @@
 
                                 <div id="chart_content">{include file="customer/chart.tpl"} </div>
 
+                                {if $orders_list}
+                                    <h1>Заказы</h1>
+                                    
+                                    {foreach from=$orders_list item=order}
+                                        <div {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>
+                                            <div>№ {$order->id} от {$order->date}</div>
+                                            <div>Сумма:{$order->getSumm()}</div>
+                                            <div>Скидка: {$order->discount}</div>
+                                            <div>Итого: {$order->getSummWithDiscount()}</div>
+                                        </div><br/>                  
+                                    {/foreach}
+                                {/if}
                             </td>
                         </tr>
                     </table>

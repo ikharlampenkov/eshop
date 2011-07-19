@@ -38,7 +38,8 @@
                 <tr>
                     <td class="ttovar" >{$user.login}</td>
                     <td class="ttovar" >{$user.role}</td>
-                    <td class="tedit" ><a href="?page={$page}&action=edit&login={$user.login}">редактировать</a><br /><a href="?page={$page}&action=del&login={$reu.login}" style="color: #830000">удалить</a> </td>
+                    <td class="tedit" ><a href="?page={$page}&action=edit&login={$user.login}">редактировать</a><br />
+                                       <a href="?page={$page}&action=del&login={$reu.login}" onclick="return confirmDelete('{$user.login}');" style="color: #830000">удалить</a> </td>
                 </tr>
             {/foreach}
         </table>

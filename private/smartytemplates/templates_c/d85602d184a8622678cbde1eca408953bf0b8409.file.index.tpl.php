@@ -1,38 +1,36 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-07-03 20:10:16
+<?php /* Smarty version Smarty-3.0.7, created on 2011-07-19 23:42:58
          compiled from "H:/www/eshop/private/smartytemplates/templates/admin/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:53124e106a381d7b64-39908781%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:71634e25b4126bbd14-58816564%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd85602d184a8622678cbde1eca408953bf0b8409' => 
     array (
       0 => 'H:/www/eshop/private/smartytemplates/templates/admin/index.tpl',
-      1 => 1309698600,
+      1 => 1311091914,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '53124e106a381d7b64-39908781',
+  'nocache_hash' => '71634e25b4126bbd14-58816564',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
 )); /*/%%SmartyHeaderCode%%*/?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8"></meta>
-        <meta name="DESCRIPTION" content="<?php echo $_smarty_tpl->getVariable('description')->value;?>
-"></meta>
-        <meta name="keywords" content="<?php echo $_smarty_tpl->getVariable('keywords')->value;?>
-"></meta>
-        <meta name="author-corporate" content=""></meta>
-        <meta name="publisher-email" content=""></meta>
 
         <style type="text/css">
-            table {
-    width: 100%;
-            }
+			h1 {
 
+			font-size: 20px;
+			font-weight: normal;
+}
+
+			body {
+				font-family:tahoma;
+			}
             tr {
    vertical-align: top;
             }
@@ -50,8 +48,47 @@ $_smarty_tpl->decodeProperties(array (
     width: 100px;
             }
 
+            .menu {
+            	color: #69aefc;
+            	font-weight: bold;
+}
+		.menu:hover {
+			color: #69aefc;
+            	font-weight: bold;
+			text-decoration: none;
+}
+		.rmenu {
+			color: #1465c0;
+}
+		.rmenu:hover {
+			 #1465c0;
+			text-decoration: none;
+}
+
+		.tedit {
+			background-color:#ebf4ff; padding: 10px; width:100px;
+}
+		.tdel {
+			background-color:#ebf4ff; padding: 10px; width:50px;
+}
+		a.tdel {
+			color: #830000;
+}
+		a.tedit {
+			color: #1465c0;
+}
+		.ttovar {
+			background-color:#f7f7f7; padding: 10px;
+}
+		.ttovarred {
+			background-color:#ffdede; padding: 10px;
+}
+
+
+a { color:#1465c0}
         </style>
 
+        <script type="text/javascript" language="javascript" src="/js/jquery.min.js" ></script>
         <script type="text/javascript" language="javascript" src="/js/main.js" ></script>
 
         <title><?php echo $_smarty_tpl->getVariable('title')->value;?>
@@ -62,18 +99,18 @@ $_smarty_tpl->decodeProperties(array (
         <?php $_template = new Smarty_Internal_Template("error_msg.tpl", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
  echo $_template->getRenderedTemplate();?><?php unset($_template);?>
 
-        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="1">
+        <table width="1000" height="100%" cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
-                <td valign="top" height="150">
+                <td valign="top" height="40">
 
-                    <table width="100%" height="150" cellpadding="0" cellspacing="0" border="0">
+                    <table width="100%" height="40" cellpadding="0" cellspacing="0" border="0" style="background-color:#69aefc">
                         <tr>
-                            <td>Электронный магазин</td>
-                            <td width="300">
+                            <td style="font-size:26px; color: white;padding-left: 25px;" valign="middle">eSHOP - административная панель управения</td>
+                            <td width="300" valign="middle" style="color:white">
 
-                                <div><?php echo $_smarty_tpl->getVariable('user')->value;?>
-</div> <a href="<?php echo $_smarty_tpl->getVariable('siteurl')->value;?>
-?logout">Выйти</a>
+                                Пользователь: <?php echo $_smarty_tpl->getVariable('user')->value;?>
+ &nbsp; / &nbsp; <a href="<?php echo $_smarty_tpl->getVariable('siteurl')->value;?>
+?logout" style="color:black">Выйти</a>
 
                             </td>
                         </tr>
@@ -85,14 +122,17 @@ $_smarty_tpl->decodeProperties(array (
             <tr>
                 <td>
 
-                    <table border="1" width="100">
+                    <table border="0" cellpadding="20" width="100%">
                         <tr>
                             <td width="230">
 
-                                <a href="?page=content_page">Контентная страница</a><br /><br />
-                                <a href="?page=catalog">Товары</a><br /><br />
-                                <a href="?page=order">Заказы</a><br /><br />
-                                <a href="?page=user">Пользователи</a><br /><br />
+                            	<table border="0" cellpadding="10" cellspacing="10" width="100%" height="100%" style="background-color:#f0f0f0">
+                            	<tr><td><h1>Меню:</h1></tr></td>
+                                <tr><td><a href="?page=content_page" class="menu">О МАГАЗИНЕ</a></td></tr>
+                                <tr><td><a href="?page=catalog" class="menu">КАТАЛОГ ТОВАРОВ</a></tr></td>
+                                <tr><td><a href="?page=order" class="menu">ЗАКАЗЫ</a></tr></td>
+                                <tr><td><a href="?page=user" class="menu">ПОЛЬЗОВАТЕЛИ</a></tr></td>
+                                </table>
 
                             </td>
                             <td>

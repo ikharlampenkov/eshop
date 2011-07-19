@@ -87,9 +87,8 @@ function checkNum(fieldtitle)
     return true;
 }
 
-function confirmDelete(name, url) {
+function confirmDelete(name) {
     if (confirm("Вы подтверждаете удаление " + name + "?")) {
-        //parent.location='http://емагазин.жкхинформ.рф/' + url;
         return true;
     } else {
         return false;

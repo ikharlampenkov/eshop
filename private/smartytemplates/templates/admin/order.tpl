@@ -75,7 +75,7 @@
                     <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->discount}</td>
                     <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->getSummWithDiscount()}</td>
                     <td class="tedit"><a href="?page={$page}&action=edit&id={$order->id}">открыть</a><br />
-                        <a href="?page={$page}&action=del&id={$order->id}" style="color: #830000">удалить</a> </td>
+                                      <a href="?page={$page}&action=del&id={$order->id}" onclick="return confirmDelete('{$order->user} {$order->date}');" style="color: #830000">удалить</a> </td>
                 </tr>
             {/foreach}
         </table>
