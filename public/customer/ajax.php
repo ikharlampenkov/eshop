@@ -42,25 +42,30 @@ $strout = '<?xml version="1.0" encoding="' . $__cfg['smarty.encoding'] . '"?><re
 if ($page == 'chart') {
 
     if ($action == 'addToChart') {
-        if ($isComplite == false) {
-            $o_order->addProduct($_GET['product'], $_GET['count']);
+        if ($isComplite == true) {
+            $o_order->clearSession();
         }
+        //if ($isComplite == false) {
+            $o_order->addProduct($_GET['product'], $_GET['count']);
+        //}
         $o_smarty->assign('chart_list', $o_order->getProductList());
         $o_smarty->assign('summ', $o_order->getSumm());
+
+        $isComplite = false;
     }
 
     if ($action == 'countChart') {
-        if ($isComplite == false) {
+        //if ($isComplite == false) {
             $o_order->changeProduct($_GET['product'], $_GET['count']);
-        }
+        //}
         $o_smarty->assign('chart_list', $o_order->getProductList());
         $o_smarty->assign('summ', $o_order->getSumm());
     }
 
     if ($action == 'order') {
-        if ($isComplite == false) {
+        //if ($isComplite == false) {
             $o_order->insertToDb();
-        }
+        //}
 
         $o_smarty->assign('chart_list', $o_order->getProductList());
         $o_smarty->assign('summ', $o_order->getSumm());

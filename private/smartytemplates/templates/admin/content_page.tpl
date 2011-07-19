@@ -7,10 +7,8 @@
 
 <form action="?page={$page}&action={$action}{if $action=='edit'}&id={$conpage.id}{/if}" method="post">
     <table width="100%">
-        <tr>
-            <td width="200" class="ttovar">Название страницы (англ)</td>
-            <td class="ttovar"><input name="data[page_title]" value="{$conpage.page_title}" /></td>
-        </tr>
+        <input name="data[page_title]" value="{$conpage.page_title}" hidden/>
+        
         <tr>
             <td class="ttovar">Название страницы</td>
             <td class="ttovar"><input name="data[title]" value="{$conpage.title}" /></td>

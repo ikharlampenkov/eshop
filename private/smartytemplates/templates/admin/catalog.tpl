@@ -107,7 +107,7 @@
                     <td class="ttovar" >{$product->title}</td>
                     <td class="ttovar" >{$product->shortText}</td>
                     <td class="ttovar" >{$product->price}</td>
-                    <td class="tedit" ><a href="?page={$page}&action=edit_product&id={$product->getId()}&rubric={$cur_rubric->getId()}">редактировать</a><br /><a href="?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}" style="color: #830000">удалить</a> </td>
+                    <td class="tedit" ><a href="?page={$page}&action=edit_product&id={$product->getId()}&rubric={$cur_rubric->getId()}">редактировать</a><br /><a href="?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}" onclick="return confirmDelete('{$product->title}'{*, '?page={$page}&action=del_product&id={$product->getId()}&rubric={$cur_rubric->getId()}'*});" style="color: #830000">удалить</a> </td>
                 </tr>
             {/foreach}
             {/if}

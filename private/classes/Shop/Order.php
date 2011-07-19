@@ -119,7 +119,7 @@ class Order {
         try {
             $sql = 'UPDATE `order`
                     SET user_login="' . $this->_user . '", date="' . $this->_date . '",
-                        discount=' . $this->_discount . ', is_complite="' . $this->_isComplite . '" 
+                        discount=' . $this->_discount . ', is_complite="' . $this->_isComplite . '"
                     WHERE id=' . $this->_id;
             $this->_db->query($sql);
 
@@ -140,7 +140,7 @@ class Order {
             simo_exception::registrMsg($e, $this->_debug);
         }
     }
-    
+
     private function _saveProductListToDb() {
         if (!empty($this->_productList)) {
             foreach ($this->_productList as $item) {
@@ -154,12 +154,12 @@ class Order {
             }
         }
     }
-    
+
     private function _deleteproductListFromDb() {
         if (!empty($this->_productList)) {
            $sql = 'DELETE FROM order_product WHERE order_id=' . $this->_id;
            $this->_db->query($sql);
-           
+
            $this->_productList = array();
         }
     }
@@ -233,6 +233,11 @@ class Order {
         simo_session::setVar('productList', $temp_list, 'order');
     }
 
+    public function clearSession() {
+        simo_session::clearVars('order');
+        $this->_productList = array();
+    }
+
     public function addProduct($product, $count) {
         $key = $this->_searchProduct($product);
         if ($key !== false) {
@@ -274,7 +279,7 @@ class Order {
         } else
             return 0;
     }
-    
+
     public function getSummWithDiscount() {
         if (!empty($this->_productList)) {
             $summ = 0;
