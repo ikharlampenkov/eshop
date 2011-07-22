@@ -1,48 +1,49 @@
 <?
 
+/*
+  CREATE  TABLE IF NOT EXISTS `status` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `title` VARCHAR(255) NOT NULL ,
+  `prior` INT UNSIGNED NOT NULL DEFAULT 0 ,
+  `color` VARCHAR(6) NOT NULL DEFAULT 'ffffff' ,
+  PRIMARY KEY (`id`) )
+  ENGINE = InnoDB
+ */
+
 /**
  * class Status
  *
  */
-class Status
-{
-
+class Status {
     /** Aggregations: */
-
     /** Compositions: */
-
-     /*** Attributes: ***/
+    /*     * * Attributes: ** */
 
     /**
      *
      * @access private
      */
     private $_id;
-
     /**
      *
      * @access private
      */
     private $_title;
-
     /**
      *
      * @access private
      */
     private $_prior = 0;
-
     /**
      *
      * @access private
      */
     private $_color = "ffffff";
-
     /**
      *
      * @access private
      */
     private $_db;
-
 
     /**
      *
@@ -50,9 +51,11 @@ class Status
      * @return
      * @access public
      */
-    public function __constuct( ) {
+    public function __constuct() {
         $this->_db = simo_db::getInstance();
-    } // end of member function __constuct
+    }
+
+// end of member function __constuct
 
     /**
      *
@@ -64,8 +67,11 @@ class Status
      * @return string
      * @access public
      */
-    public function __get( $name,  $value ) {
-    } // end of member function __get
+    public function __get($name, $value) {
+
+    }
+
+// end of member function __get
 
     /**
      *
@@ -73,9 +79,11 @@ class Status
      * @return int
      * @access public
      */
-    public function getId( ) {
+    public function getId() {
         return $this->_id;
-    } // end of member function getId
+    }
+
+// end of member function getId
 
     /**
      *
@@ -83,9 +91,11 @@ class Status
      * @return string
      * @access public
      */
-    public function getTitle( ) {
+    public function getTitle() {
         return $this->_title;
-    } // end of member function getTitle
+    }
+
+// end of member function getTitle
 
     /**
      *
@@ -93,9 +103,11 @@ class Status
      * @return int
      * @access public
      */
-    public function getPrior( ) {
+    public function getPrior() {
         return $this->_prior;
-    } // end of member function getPrior
+    }
+
+// end of member function getPrior
 
     /**
      *
@@ -103,9 +115,11 @@ class Status
      * @return string
      * @access public
      */
-    public function getColor( ) {
+    public function getColor() {
         return $this->_color;
-    } // end of member function getColor
+    }
+
+// end of member function getColor
 
     /**
      *
@@ -115,8 +129,11 @@ class Status
      * @return
      * @access public
      */
-    public function setId( $value ) {
-    } // end of member function setId
+    public function setId($value) {
+        $this->_id = $value;
+    }
+
+// end of member function setId
 
     /**
      *
@@ -126,8 +143,11 @@ class Status
      * @return
      * @access public
      */
-    public function setTitle( $value ) {
-    } // end of member function setTitle
+    public function setTitle($value) {
+        $this->_title = $value;
+    }
+
+// end of member function setTitle
 
     /**
      *
@@ -137,8 +157,15 @@ class Status
      * @return
      * @access public
      */
-    public function setPrior( $value ) {
-    } // end of member function setPrior
+    public function setPrior($value) {
+        if (empty($value) || $value < 0) {
+            $this->_prior = 0;
+        } else {
+            $this->_prior = $value;
+        }
+    }
+
+// end of member function setPrior
 
     /**
      *
@@ -148,8 +175,12 @@ class Status
      * @return
      * @access public
      */
-    public function setColor( $value ) {
-    } // end of member function setColor
+    public function setColor($value) {
+        
+
+    }
+
+// end of member function setColor
 
     /**
      *
@@ -157,8 +188,19 @@ class Status
      * @return
      * @access public
      */
-    public function insertToDb( ) {
-    } // end of member function insertToDb
+    public function insertToDb() {
+        try {
+            $sql = 'INSERT INTO status (title, prior, color)
+                    VALUES ("' . $this->_title . '", ' . $this->_prior . ', "' . $this->_color . '")';
+            $this->_db->query($sql);
+
+            $this->_id = $this->_db->getLastInsertId();
+        } catch (Exception $e) {
+            simo_exception::registrMsg($e, $this->_debug);
+        }
+    }
+
+// end of member function insertToDb
 
     /**
      *
@@ -166,8 +208,18 @@ class Status
      * @return
      * @access public
      */
-    public function updateToDb( ) {
-    } // end of member function updateToDb
+    public function updateToDb() {
+        try {
+            $sql = 'UPDATE status
+                    SET title="' . $this->_title . '", prior=' . $this->_prior . ', color="' . $this->_color . '"
+                    WHERE id=' . $this->_id;
+            $this->_db->query($sql);
+        } catch (Exception $e) {
+            simo_exception::registrMsg($e, $this->_debug);
+        }
+    }
+
+// end of member function updateToDb
 
     /**
      *
@@ -175,8 +227,16 @@ class Status
      * @return
      * @access public
      */
-    public function deleteFromDb( ) {
-    } // end of member function deleteFromDb
+    public function deleteFromDb() {
+        try {
+            $sql = 'DELETE FROM status WHERE id=' . $this->_id;
+            $this->_db->query($sql);
+        } catch (Exception $e) {
+            simo_exception::registrMsg($e, $this->_debug);
+        }
+    }
+
+// end of member function deleteFromDb
 
     /**
      *
@@ -187,8 +247,13 @@ class Status
      * @static
      * @access public
      */
-    public static function getInstanceByArray( $array ) {
-    } // end of member function getInstanceByArray
+    public static function getInstanceByArray(array $array) {
+        $o = new Status();
+        $o->_assignByHash($array);
+        return $o;
+    }
+
+// end of member function getInstanceByArray
 
     /**
      *
@@ -199,8 +264,22 @@ class Status
      * @static
      * @access public
      */
-    public static function getInstanceById( $id ) {
-    } // end of member function getInstanceById
+    public static function getInstanceById($id) {
+        try {
+            $db = simo_db::getInstance();
+            $result = $db->query('SELECT * FROM status WHERE id=' . $id, simo_db::QUERY_MOD_ASSOC);
+            if (isset($result[0])) {
+                $o = new Status();
+                $o->assignByHash($result[0]);
+                return $o;
+            }
+        } catch (Exception $e) {
+            simo_exception::registrMsg($e, $this->_debug);
+            return null;
+        }
+    }
+
+// end of member function getInstanceById
 
     /**
      *
@@ -209,10 +288,26 @@ class Status
      * @static
      * @access public
      */
-    public static function getAllInstance( ) {
-    } // end of member function getAllInstance
+    public static function getAllInstance() {
+        try {
+            $db = simo_db::getInstance();
+            $result = $db->query('SELECT * FROM status' . $id, simo_db::QUERY_MOD_ASSOC);
+            if (isset($result[0])) {
+                $list = array();
+                foreach ($result as $res) {
+                    $o = new Status();
+                    $o->assignByHash($res);
+                    $list[] = $o;
+                }
+                return $list;
+            }
+        } catch (Exception $e) {
+            simo_exception::registrMsg($e, $this->_debug);
+            return null;
+        }
+    }
 
-
+// end of member function getAllInstance
 
     /**
      *
@@ -222,10 +317,15 @@ class Status
      * @return
      * @access private
      */
-    private function _assignByHash( $array ) {
-    } // end of member function _assignByHash
+    private function _assignByHash(array $array) {
+        $this->setId($array['id']);
+        $this->setTitle($array['title']);
+        $this->setPrior($array['prior']);
+        $this->setColor($array['color']);
+    }
 
+// end of member function _assignByHash
+}
 
-
-} // end of Status
+// end of Status
 ?>
