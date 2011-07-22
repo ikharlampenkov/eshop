@@ -25,6 +25,15 @@
                 <td class="ttovar"><input name="data[discount]" value="{$order->discount}" /></td>
             </tr>
             <tr>
+                <td class="ttovar">Статус заказа</td>
+                <td class="ttovar"><select name="data[status]">
+                        {foreach from=$status_list item=status}
+                            <option value="{$status->id}" {if $status->id==$order->status->id}selected="selected"{/if}>{$status->title}</option>
+                        {/foreach}
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td class="ttovar">Завершeн</td>
                 <td class="ttovar"><input type="checkbox" name="data[is_complite]" {if $order->isComplite}checked="checked"{/if} style="width:14px;" /></td>
             </tr>
@@ -53,7 +62,28 @@
         </table>
     {/if}
 
+{elseif $action=='add_status' || $action=="edit_status"}
 
+    <h1>{$txt}</h1>
+
+    <form action="?page={$page}&action={$action}{if $action=='edit_status'}&id={$status->id}{/if}" method="post">
+        <table width="100%">
+            <tr>
+                <td width="200" class="ttovar" >Название</td>
+                <td class="ttovar" ><input name="data[title]" value="{$status->title}" /></td>
+            </tr>
+            <tr>
+                <td width="200" class="ttovar" >Порядок сортировкм</td>
+                <td class="ttovar" ><input name="data[prior]" value="{$status->prior}" /></td>
+            </tr>
+            <tr>
+                <td width="200" class="ttovar" >Цвет</td>
+                <td class="ttovar" ><input name="data[color]" value="{$status->color}" /></td>
+            </tr>
+        </table>
+        <input id="save" name="save" type="submit" value="Сохранить" />
+    </form>
+    
 {else}
 
 {if $order_list}
@@ -65,6 +95,7 @@
                 <td class="ttovar">Сумма</td>
                 <td class="ttovar">Скидка</td>
                 <td class="ttovar">Cо скидкой</td>
+                <td class="ttovar">Статус заказа</td>
                 <td class="ttovar">&nbsp;</td>
             </tr>
             {foreach from=$order_list item=order}
@@ -74,11 +105,31 @@
                     <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->getSumm()}</td>
                     <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->discount}</td>
                     <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->getSummWithDiscount()}</td>
+                    <td {if $order->isComplite==0}class="ttovarred"{else}class="ttovar"{/if}>{$order->status->title}</td>
                     <td class="tedit"><a href="?page={$page}&action=edit&id={$order->id}">открыть</a><br />
                                       <a href="?page={$page}&action=del&id={$order->id}" onclick="return confirmDelete('{$order->user} {$order->date}');" style="color: #830000">удалить</a> </td>
                 </tr>
             {/foreach}
         </table>
     {/if}
+    
+    <table width="100%">
+        <tr>
+            <td colspan="5" style="background-color:#f7f7f7; padding: 10px; text-align:center;" valign="middle">
+                <a href="?page={$page}&action=add_status">добавить статус</a>
+            </td>
+        </tr>
+        {if $status_list}
+            {foreach from=$status_list item=status}
+                <tr>
+                    <td class="ttovar" >{$status->title}</td>
+                    <td class="ttovar" >{$status->prior}</td>
+                    <td class="ttovar" >{$status->color}</td>
+                    <td class="tedit" ><a href="?page={$page}&action=edit_status&id={$status->getId()}">редактировать</a><br />
+                        <a href="?page={$page}&action=del_status&id={$status->getId()}" onclick="return confirmDelete('{$status->title}');" style="color: #830000">удалить</a> </td>
+                </tr>
+            {/foreach}
+        {/if}
+    </table>
 
 {/if}

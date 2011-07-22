@@ -178,13 +178,45 @@ if ($page == 'order') {
     $o_catalog = new ProductCatalog();
     
     
-    
-    if ($action == 'edit' && isset($_GET['id'])) {
+    if ($action == 'add_status') {
+        $o_status = new Status();
+        if (isset($_POST['data'])) {
+            $o_status->setTitle($_POST['data']['title']);
+            $o_status->setPrior($_POST['data']['prior']);
+            $o_status->setColor($_POST['data']['color']);
+            $o_status->insertToDb();
+            simo_functions::chLocation('?page=' . $page);
+            exit;
+        }
+        $o_smarty->assign('status', $o_status);
+        $o_smarty->assign('txt', 'Добавить статус');
+    } elseif ($action == 'edit_status' && isset($_GET['id'])) {
+        $o_status = Status::getInstanceById($_GET['id']);
+
+        if (isset($_POST['data'])) {
+            $o_status->setTitle($_POST['data']['title']);
+            $o_status->setPrior($_POST['data']['prior']);
+            $o_status->setColor($_POST['data']['color']);
+            $o_status->updateToDb();
+            simo_functions::chLocation('?page=' . $page);
+            exit;
+        }
+
+        $o_smarty->assign('status', $o_status);
+        $o_smarty->assign('txt', 'Редактировать статус');
+    } elseif ($action == 'del_status' && isset($_GET['id'])) {
+        $o_status = Status::getInstanceById($_GET['id']);
+        $o_status->deleteFromDb();
+        unset($o_status);
+        simo_functions::chLocation('?page=' . $page);
+        exit;
+    } elseif ($action == 'edit' && isset($_GET['id'])) {
         $o_order = Order::getInstanceById($_GET['id']);
 
         if (isset($_POST['data'])) {
             $o_order->setDiscount($_POST['data']['discount']);
             $o_order->setIsComplite($_POST['data']['is_complite']);
+            $o_order->setStatus($_POST['data']['status']);
             
             $o_order->updateToDb();
             simo_functions::chLocation('?page=' . $page);
@@ -193,6 +225,7 @@ if ($page == 'order') {
 
         $o_user = new share_user();
         $o_smarty->assign('user_list', $o_user->getAllUser());
+        $o_smarty->assign('status_list', Status::getAllInstance());
         
         $o_smarty->assign('order', $o_order);
         $o_smarty->assign('txt', 'Редактировать заказ');
@@ -203,6 +236,7 @@ if ($page == 'order') {
         simo_functions::chLocation('?page=' . $page);
         exit;
     } else {
+        $o_smarty->assign('status_list', Status::getAllInstance());
         $o_smarty->assign('order_list', $o_catalog->getAllOrder());        
     }
 }

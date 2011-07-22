@@ -51,7 +51,7 @@ class Status {
      * @return
      * @access public
      */
-    public function __constuct() {
+    public function __construct() {
         $this->_db = simo_db::getInstance();
     }
 
@@ -62,13 +62,14 @@ class Status {
      *
      * @param string name
 
-     * @param string value
-
      * @return string
      * @access public
      */
-    public function __get($name, $value) {
-
+    public function __get($name) {
+        $method = "get{$name}";
+        if (method_exists($this, $method)) {
+            return $this->$method();
+        }
     }
 
 // end of member function __get
@@ -176,8 +177,9 @@ class Status {
      * @access public
      */
     public function setColor($value) {
-        
-
+        if (preg_match('/(#?)[0-9a-fA-F]{6}/', $value)>0) {
+            $this->_color = $value;
+        } 
     }
 
 // end of member function setColor
@@ -270,7 +272,7 @@ class Status {
             $result = $db->query('SELECT * FROM status WHERE id=' . $id, simo_db::QUERY_MOD_ASSOC);
             if (isset($result[0])) {
                 $o = new Status();
-                $o->assignByHash($result[0]);
+                $o->_assignByHash($result[0]);
                 return $o;
             }
         } catch (Exception $e) {
@@ -291,12 +293,12 @@ class Status {
     public static function getAllInstance() {
         try {
             $db = simo_db::getInstance();
-            $result = $db->query('SELECT * FROM status' . $id, simo_db::QUERY_MOD_ASSOC);
+            $result = $db->query('SELECT * FROM status', simo_db::QUERY_MOD_ASSOC);
             if (isset($result[0])) {
                 $list = array();
                 foreach ($result as $res) {
                     $o = new Status();
-                    $o->assignByHash($res);
+                    $o->_assignByHash($res);
                     $list[] = $o;
                 }
                 return $list;

@@ -26,6 +26,8 @@ class Order {
 
     /** Compositions: */
     /*     * * Attributes: ** */
+    
+    const NEW_ORDER = 1;
 
     protected $_id;
     protected $_user;
@@ -33,10 +35,12 @@ class Order {
     protected $_discount = 0;
     protected $_isComplite = 0;
     protected $_productList = array();
+    protected $_status = null;
     private $_db;
 
     public function __construct() {
         $this->_db = simo_db::getInstance();
+        $this->setStatus(Order::NEW_ORDER);
     }
 
     public function __get($name) {
@@ -69,6 +73,10 @@ class Order {
     public function getProductList() {
         return $this->_productList;
     }
+    
+    public function getStatus() {
+        return $this->_status;
+    }
 
     public function setId($value) {
         $this->_id = $value;
@@ -98,12 +106,20 @@ class Order {
             $this->_isComplite = $value;
         }
     }
+    
+    public function setStatus($value) {
+        if ($value instanceof Status) {
+            $this->_status = $value;
+        } else {
+            $this->_status = Status::getInstanceById($value);
+        }
+    }
 
     public function insertToDb() {
         global $__cfg;
         try {
-            $sql = 'INSERT INTO `order` (user_login, date, discount, is_complite)
-                    VALUES ("' . $this->_user . '", "' . $this->_date . '", ' . $this->_discount . ', ' . $this->_isComplite . ')';
+            $sql = 'INSERT INTO `order` (user_login, date, discount, is_complite, status)
+                    VALUES ("' . $this->_user . '", "' . $this->_date . '", ' . $this->_discount . ', ' . $this->_isComplite . ', ' . $this->_status->id . ')';
             $this->_db->query($sql);
 
             $this->_id = $this->_db->getLastInsertId();
@@ -119,7 +135,8 @@ class Order {
         try {
             $sql = 'UPDATE `order`
                     SET user_login="' . $this->_user . '", date="' . $this->_date . '",
-                        discount=' . $this->_discount . ', is_complite="' . $this->_isComplite . '"
+                        discount=' . $this->_discount . ', is_complite="' . $this->_isComplite . '", 
+                        status=' . $this->_status->id . ' 
                     WHERE id=' . $this->_id;
             $this->_db->query($sql);
 
@@ -191,6 +208,7 @@ class Order {
         $this->setDate($result['date']);
         $this->setDiscount($result['discount']);
         $this->setIsComplite($result['is_complite']);
+        $this->setStatus($result['status']);
     }
 
     protected function _fillProductList() {
