@@ -2,7 +2,7 @@
 
 //include_once 'db_driver.php';
 
-class mysql_driver extends db_driver
+class mysql_db_driver extends db_driver
 {
  private $_connect = null;
 
@@ -11,7 +11,7 @@ class mysql_driver extends db_driver
  public function connect($dsn)
  {
   if (is_array($dsn)) {
-  	$result = mysql_connect($dsn['host'], $dsn['user'], $dsn['password']);
+  	$result = mysql_connect($dsn['host'] . ':' . $dsn['port'], $dsn['user'], $dsn['password']);
   	if ($result != false) {
   	  $this->_connect = $result;
   	  return true;

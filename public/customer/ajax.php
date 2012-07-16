@@ -27,7 +27,13 @@ if (isset($_GET['action'])) {
 
 
 $o_order = new Order();
-$o_order->setUser(simo_session::getVar('login', 'user'));
+
+$user = simo_session::getVar('login', 'user');
+if (is_null($user)) {
+    $user = 'guest';
+}
+
+$o_order->setUser($user);
 $o_order->restoreFromSession();
 
 global $__cfg;
@@ -50,7 +56,7 @@ if ($page == 'chart') {
           }
          */
         //if ($isComplite == false) {
-        $o_order->addProduct($_GET['product'], $_GET['count']);
+        $o_order->addProduct($_GET['product'], $_GET['count'], $_GET['tone']);
         //}
         $o_smarty->assign('chart_list', $o_order->getProductList());
         $o_smarty->assign('summ', $o_order->getSumm());
@@ -68,7 +74,8 @@ if ($page == 'chart') {
 
     if ($action == 'order') {
         //if ($isComplite == false) {
-        $o_order->insertToDb();
+        $data = array();
+        $o_order->insertToDb($data);
         //}
 
         $o_smarty->assign('chart_list', $o_order->getProductList());

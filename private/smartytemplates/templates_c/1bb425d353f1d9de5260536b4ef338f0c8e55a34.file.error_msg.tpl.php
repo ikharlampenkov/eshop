@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.7, created on 2011-07-19 23:33:46
-         compiled from "H:/www/eshop/private/smartytemplates/templates/error_msg.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:37934e25b1eaa2c6d1-87692128%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.0.7, created on 2012-07-16 19:34:09
+         compiled from "F:/www/eshop/private/smartytemplates/templates/error_msg.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:693550040a41a96c76-29304302%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '6291b5d902587592547110434c8704ee8488a56f' => 
+    '1bb425d353f1d9de5260536b4ef338f0c8e55a34' => 
     array (
-      0 => 'H:/www/eshop/private/smartytemplates/templates/error_msg.tpl',
-      1 => 1242574452,
+      0 => 'F:/www/eshop/private/smartytemplates/templates/error_msg.tpl',
+      1 => 1341939840,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '37934e25b1eaa2c6d1-87692128',
+  'nocache_hash' => '693550040a41a96c76-29304302',
   'function' => 
   array (
   ),

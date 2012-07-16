@@ -15,13 +15,13 @@ class Image extends File {
     /**
      *
      *
-     * @param string field
-
+     * @param $field
+     * @throws Exception
+     * @internal param \field $string
      * @return string
-     * @access public
      */
     public function download($field) {
-        if (isset($_FILES[$field])) {
+        if (isset($_FILES[$field]) && $_FILES[$field]['error'] == 0) {
             $this->_ext = $this->extractExt($_FILES[$field]['name']);
 
             if (!in_array($this->_ext, $this->_extList)) {
@@ -43,8 +43,6 @@ class Image extends File {
             return false;
         }
     }
-
-// end of member function download
 
     /**
      *

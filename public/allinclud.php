@@ -1,5 +1,5 @@
 <?php
 
-include_once 'H:/www/eshop/private/classes/simo.php';
+include_once 'F:/www/eshop/private/classes/simo.php';
 
 ?>

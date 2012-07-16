@@ -8,13 +8,13 @@ if( !isset($_SESSION)) {
  * Подключаем общий файл конфигурации
  *
  */
-include_once 'H:/www/eshop/private/config/simo_conf.php';
+include_once 'F:/www/eshop/private/config/simo_conf.php';
 
 /**
  * Подключаем Smarty
  *
  */
-include_once 'H:/www/eshop/private/classes/smarty/Smarty.class.php';
+include_once 'F:/www/eshop/private/classes/smarty/Smarty.class.php';
 
 /**
  * Функция автоматически загружающая файлы с классами по необходимости

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
   CREATE  TABLE IF NOT EXISTS `status` (
@@ -48,19 +48,16 @@ class Status {
     /**
      *
      *
-     * @return
-     * @access public
+     * @return \Status
      */
     public function __construct() {
         $this->_db = simo_db::getInstance();
     }
 
-// end of member function __constuct
-
     /**
      *
      *
-     * @param string name
+     * @param string
 
      * @return string
      * @access public
@@ -72,8 +69,6 @@ class Status {
         }
     }
 
-// end of member function __get
-
     /**
      *
      *
@@ -83,8 +78,6 @@ class Status {
     public function getId() {
         return $this->_id;
     }
-
-// end of member function getId
 
     /**
      *
@@ -120,15 +113,11 @@ class Status {
         return $this->_color;
     }
 
-// end of member function getColor
-
     /**
      *
      *
      * @param int value
-
-     * @return
-     * @access public
+     * @return void
      */
     public function setId($value) {
         $this->_id = $value;
@@ -276,7 +265,7 @@ class Status {
                 return $o;
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, false);
             return null;
         }
     }
@@ -304,7 +293,7 @@ class Status {
                 return $list;
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, false);
             return null;
         }
     }

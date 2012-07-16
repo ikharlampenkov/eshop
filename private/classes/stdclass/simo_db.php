@@ -1,6 +1,7 @@
 <?php
 
-class simo_db {
+class simo_db
+{
     const QUERY_MODE_NUM = 1;
     const QUERY_MOD_ASSOC = 2;
     const QUERY_MOD_OBJECT = 3;
@@ -11,12 +12,21 @@ class simo_db {
      * @var array
      */
     private $_dsn = array();
+    /**
+     * @var db_driver
+     */
     private $_driver = null;
+
     private $_conn = false;
     static private $_instance = null;
     public $debug = false;
 
-    static function getInstance() {
+    /**
+     * @static
+     * @return simo_db
+     */
+    static function getInstance()
+    {
         if (is_null(self::$_instance)) {
             $class = __CLASS__;
             self::$_instance = new $class();
@@ -24,7 +34,8 @@ class simo_db {
         return self::$_instance;
     }
 
-    public function connect($dsn='') {
+    public function connect($dsn = '')
+    {
         global $__cfg;
 
         if (empty($dsn)) {
@@ -49,7 +60,6 @@ class simo_db {
             }
         } catch (simo_exception $s_e) {
             throw new Exception('Can`t connect to db');
-            return false;
         }
     }
 
@@ -61,7 +71,8 @@ class simo_db {
      * @param integer $mode 1-циф 2-ассоц 3-объект
      * @return array
      */
-    public function query($query, $mode = 1) {
+    public function query($query, $mode = 1)
+    {
         try {
             if (!$this->_conn) {
                 $this->connect();
@@ -80,7 +91,8 @@ class simo_db {
         }
     }
 
-    public function prepareString($string) {
+    public function prepareString($string)
+    {
         global $__cfg;
         try {
             if (!$this->_conn) {
@@ -96,7 +108,8 @@ class simo_db {
         }
     }
 
-    public function prepareArray($data) {
+    public function prepareArray($data)
+    {
         foreach ($data as $key => $value) {
             if (!is_array($value)) {
                 $data[$key] = self::prepareString($value);
@@ -107,7 +120,13 @@ class simo_db {
         return $data;
     }
 
-    public function getNextID($table, $idname = 'id') {
+    public function prepareStringToOut($string)
+    {
+        return str_replace('"', '&quot;', stripslashes(stripcslashes($string)));
+    }
+
+    public function getNextID($table, $idname = 'id')
+    {
         try {
             if (!$this->_conn) {
                 $this->connect();
@@ -119,7 +138,8 @@ class simo_db {
         }
     }
 
-    public function getLastInsertID() {
+    public function getLastInsertID()
+    {
         try {
             if (!$this->_conn) {
                 $this->connect();
@@ -131,7 +151,8 @@ class simo_db {
         }
     }
 
-    public function setCharset($charset) {
+    public function setCharset($charset)
+    {
         try {
             if (!$this->_conn) {
                 $this->connect();
@@ -143,7 +164,8 @@ class simo_db {
         }
     }
 
-    public function setDB($dbname) {
+    public function setDB($dbname)
+    {
         try {
             if (!$this->_conn) {
                 $this->connect();
@@ -155,20 +177,25 @@ class simo_db {
         }
     }
 
-    private function __construct() {
+    private function __construct()
+    {
 
     }
 
-    private function _prepareDSN($dsn) {
+    private function _prepareDSN($dsn)
+    {
         $result = parse_url($dsn);
         $this->_dsn['scheme'] = $result['scheme'];
         $this->_dsn['host'] = $result['host'];
+        $this->_dsn['port'] = $result['port'];
         $this->_dsn['user'] = $result['user'];
         $this->_dsn['password'] = $result['pass'];
         $this->_dsn['db'] = str_replace('/', '', $result['path']);
+        //print_r($this->_dsn);
     }
 
-    private function _loadDriver() {
+    private function _loadDriver()
+    {
         global $__cfg;
 
         $module_name = $this->_dsn['scheme'] . '_db_driver';

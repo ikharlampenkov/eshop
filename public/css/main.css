@@ -1,0 +1,416 @@
+html, body {
+    font-family: tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+tr {
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+td {
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    width: 100%;
+}
+
+input[type=checkbox] {
+    width: 14px;
+}
+
+input[type=submit] {
+    width: 100px;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+}
+
+input[type="checkbox"] {
+    width: 14px;
+}
+
+#save {
+    width: 100px;
+}
+
+a {
+    font-size: 14px;
+    color: #143bba;
+}
+
+h1 {
+    font-size: 24px;
+    color: #143bba;
+    margin: 0 0 16px 0;
+}
+
+h3 {
+    font-size: 18px;
+    color: #143bba;
+    margin: 0 0 10px 0;
+}
+
+.loginfield {
+    color: #d8dada;
+    border: 1px #d8dada solid;
+    width: 122px;
+    height: 22px;
+    vertical-align: top;
+}
+
+.main-block {
+    width: 1000px;
+    height: 100%;
+}
+
+.head-block {
+    width: 1000px;
+    height: 125px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.head-url {
+    width: 1000px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.head-url a {
+    color: #000000;
+    text-decoration: none;
+    font-family: times, sans-serif;
+    font-size: 24px;
+}
+
+.head-phone {
+    color: #000000;
+    text-decoration: none;
+    font-family: times, sans-serif;
+    font-size: 24px;
+
+    float: right;
+    padding-right: 50px;
+}
+
+.menu-phone {
+    color: #000000;
+    text-decoration: none;
+    font-family: times, sans-serif;
+    font-size: 24px;
+    text-align: left;
+}
+
+.user-info {
+    font-size: 14px;
+}
+
+.discont-block {
+    width: 1000px;
+    height: 40px;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.discont-block a {
+    font-size: 18px;
+    color: #143bba;
+    text-decoration: none;
+}
+
+.sp-block {
+    width: 1000px;
+    height: 208px;
+    margin: 0 auto;
+}
+
+.sp-block-place {
+    width: 320px;
+    height: 208px;
+
+    vertical-align: middle;
+    text-align: center;
+    padding-left: 9px;
+}
+
+.sp-block-place .container {
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    width: 302px;
+    height: 204px;
+}
+
+.sp-block-place .container div {
+    padding: 8px;
+    width: 286px;
+    height: 188px;
+    vertical-align: bottom;
+    margin: auto auto;
+}
+
+.sp-block-place .container div p {
+    color: #929292;
+}
+
+.cat-block {
+    width: 1000px;
+    padding: 20px 0px;
+}
+
+.cat-block-sub {
+
+}
+
+.cat-block-sub .tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cat-block-sub .child {
+    list-style: none;
+}
+
+.cat-block-sub .tree .rubric {
+    margin: 3px;
+
+}
+
+.cat-block-sub .tree .rubric a {
+    font-size: 14px;
+    color: #143bba;
+    text-decoration: none;
+}
+
+.cat-tree-block {
+    width: 250px;
+}
+
+.cat-tree-block .tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cat-tree-block .child {
+    list-style: none;
+}
+
+.cat-tree-block .tree .rubric {
+    margin: 3px;
+
+}
+
+.cat-tree-block .tree .rubric a {
+    font-size: 14px;
+    color: #143bba;
+    text-decoration: none;
+}
+
+.cat-main-block {
+    padding: 0 25px;
+}
+
+.rubric-block .tree {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rubric-block .tree .rubric {
+    margin: 3px;
+
+}
+
+.rubric-block .tree .rubric a {
+    font-size: 14px;
+    color: #143bba;
+    text-decoration: none;
+}
+
+.nav_menu {
+    color: #2f2f2f;
+    height: 35px;
+    text-align: left;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+
+.prod_fieldset {
+    border: 0.1em solid #ddd;
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+    width: 336px;
+}
+
+.prod_fieldset table {
+    width: 336px;
+    height: 230px;;
+}
+
+.tov_podr {
+    color: #929292;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.ttovar {
+    background-color: #f7f7f7;
+    padding: 10px;
+}
+
+.ttovarred {
+    background-color: #ffdede;
+    padding: 10px;
+}
+
+.error, .red {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+table.anketafree td, table.anketafree th {
+    padding: 0 40px 20px 0;
+}
+
+.anket-btn {
+    width: 150px;
+}
+
+.tone-big {
+    height: 62px;
+}
+
+.tone-big ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 62px;
+}
+
+.tone-big ul li {
+    float: left;
+}
+
+.tone-big ul li img {
+    height: 62px;
+    width: 62px;
+    border: 0;
+}
+
+.tone-big #ton_text {
+    font-size: 14px;
+    margin: 20px 0 0 10px;
+}
+
+.ton_input {
+    cursor: pointer;
+    height: 36px;
+    width: 36px;
+    margin-right: 15px;
+    border: 0.1em solid #5e5e5e;
+}
+
+.tt-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.tt-menu li {
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #143bba;
+    border-bottom: 1px #6e6e6e solid;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-left: 1px #6e6e6e solid;
+    z-index: 9999;
+}
+
+.tt-menu li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 7px 15px 7px 10px;
+}
+
+.tt-menu ul {
+    display: none;
+    position: absolute;
+    left: 249px;
+    top: 0;
+    margin: 0;
+    padding: 0;
+
+}
+
+.tt-menu, .tt-menu ul {
+    width: 250px;
+}
+
+.level-item {
+    background: #143bba url(/i/level-item.png) 230px center no-repeat !important;
+}
+
+.level-item2 {
+    background: #143bba url(/i/level-item2.png) 1230px center no-repeat !important;
+}
+
+.active {
+    background: #FBA61A !important;
+}
+
+.top-menu-table {
+    padding: 10px;
+    margin: 10px;
+    border-collapse: separate;
+    border-spacing: 10px 0;
+}
+
+.top-menu {
+    height: 40px;
+    text-align: center;
+    background: #143bba;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+
+    width: 250px;
+}
+
+.top-menu a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 7px 15px 7px 10px;
+}
+
+

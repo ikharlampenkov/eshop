@@ -7,8 +7,8 @@
  * @package simo
  */
 
-$__cfg['db.dsn'] = 'mysqli://root:2BGxPIIB@localhost/eshop';
-$__cfg['site.main.dir'] = 'H:/www/eshop/';
+$__cfg['db.dsn'] = 'mysqli://root:2BGxPIIB@localhost:3306/eshop';
+$__cfg['site.main.dir'] = 'F:/www/eshop/';
 $__cfg['db.driver.path'] = $__cfg['site.main.dir'] . 'private/classes/stdclass/db_driver/';
 $__cfg['db.driver.debug'] = true;
 

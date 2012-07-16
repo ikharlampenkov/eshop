@@ -4,11 +4,8 @@
  * class Product
  *
  */
-class Product {
-    /** Aggregations: */
-    /** Compositions: */
-    /*     * * Attributes: ** */
-
+class Product
+{
     /**
      *
      * @access protected
@@ -20,7 +17,7 @@ class Product {
      */
     protected $_title;
     /**
-     *
+     * @var Image
      * @access protected
      */
     protected $_img = null;
@@ -39,16 +36,19 @@ class Product {
      * @access protected
      */
     protected $_rubric = null;
+
     protected $_price = 0;
+
+    protected $_isSpec = 0;
+
     private $_db;
 
     /**
-     *
-     *
-     * @return
-     * @access public
+     * @param int $id
+     * @param string $title
      */
-    public function __construct($id = 0, $title = '') {
+    public function __construct($id = 0, $title = '')
+    {
         $this->_db = simo_db::getInstance();
 
         $this->_id = $id;
@@ -57,7 +57,8 @@ class Product {
 
 // end of member function __construct
 
-    public function __get($name) {
+    public function __get($name)
+    {
         $method = "get{$name}";
         if (method_exists($this, $method)) {
             return $this->$method();
@@ -70,7 +71,8 @@ class Product {
      * @return int
      * @access public
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->_id;
     }
 
@@ -82,7 +84,8 @@ class Product {
      * @return string
      * @access public
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->_title;
     }
 
@@ -94,7 +97,8 @@ class Product {
      * @return FileManager::Image
      * @access public
      */
-    public function getImg() {
+    public function getImg()
+    {
         return $this->_img;
     }
 
@@ -106,7 +110,8 @@ class Product {
      * @return string
      * @access public
      */
-    public function getShortText() {
+    public function getShortText()
+    {
         return $this->_shortText;
     }
 
@@ -118,7 +123,8 @@ class Product {
      * @return string
      * @access public
      */
-    public function getFullText() {
+    public function getFullText()
+    {
         return $this->_fullText;
     }
 
@@ -130,17 +136,20 @@ class Product {
      * @return Shop::Rubric
      * @access public
      */
-    public function getRubric() {
+    public function getRubric()
+    {
         return $this->_rubric;
     }
 
 // end of member function getRubric
 
-    public function getPrice() {
+    public function getPrice()
+    {
         return $this->_price;
     }
 
-    public function setId($value) {
+    public function setId($value)
+    {
         $this->_id = $value;
     }
 
@@ -148,11 +157,11 @@ class Product {
      *
      *
      * @param string value
-
      * @return
      * @access public
      */
-    public function setTitle($value) {
+    public function setTitle($value)
+    {
         $this->_title = $value;
     }
 
@@ -162,17 +171,18 @@ class Product {
      *
      *
      * @param string value
-
      * @return
      * @access public
      */
-    public function setShortText($value) {
+    public function setShortText($value)
+    {
         $this->_shortText = $value;
     }
 
 // end of member function setShortText
 
-    public function setImg($value) {
+    public function setImg($value)
+    {
         if (is_null($this->_img)) {
             global $__cfg;
             $this->_img = new Image($__cfg['file.upload.dir'], $value);
@@ -182,7 +192,8 @@ class Product {
         $this->_shortText = $value;
     }
 
-    public function setRubric($value) {
+    public function setRubric($value)
+    {
         $this->_rubric = Rubric::getInstanceById($value);
     }
 
@@ -190,17 +201,18 @@ class Product {
      *
      *
      * @param string value
-
      * @return
      * @access public
      */
-    public function setFullText($value) {
+    public function setFullText($value)
+    {
         $this->_fullText = $value;
     }
 
 // end of member function setFullText
 
-    public function setPrice($value) {
+    public function setPrice($value)
+    {
         if (!empty($value)) {
             $this->_price = str_replace(',', '.', $value);
         } else {
@@ -208,11 +220,22 @@ class Product {
         }
     }
 
-    public function insertToDb() {
+    public function setIsSpec($isSpec)
+    {
+        $this->_isSpec = $isSpec;
+    }
+
+    public function getIsSpec()
+    {
+        return $this->_isSpec;
+    }
+
+    public function insertToDb()
+    {
         global $__cfg;
         try {
-            $sql = 'INSERT INTO product (product_rubric_id, title, short_text, full_text, price)
-                    VALUES (' . $this->_rubric->id . ', "' . $this->_title . '", "' . $this->_shortText . '", "' . $this->_fullText . '", ' . $this->_price . ')';
+            $sql = 'INSERT INTO product (product_rubric_id, title, short_text, full_text, price, is_spec)
+                    VALUES (' . $this->_rubric->id . ', "' . $this->_title . '", "' . $this->_shortText . '", "' . $this->_fullText . '", ' . $this->_price . ', ' . $this->_isSpec . ')';
             $this->_db->query($sql);
 
             $this->_id = $this->_db->getLastInsertId();
@@ -225,17 +248,18 @@ class Product {
                 $this->_db->query('UPDATE product SET img="' . $fileName . '" WHERE id=' . $this->_id);
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
             return null;
         }
     }
 
-    public function updateToDb() {
+    public function updateToDb()
+    {
         try {
             $sql = 'UPDATE product
                     SET product_rubric_id=' . $this->_rubric->id . ', title="' . $this->_title . '",
                         short_text="' . $this->_shortText . '", full_text="' . $this->_fullText . '",
-                        price=' . $this->_price . '
+                        price=' . $this->_price . ', is_spec=' . $this->_isSpec . '
                     WHERE id=' . $this->_id;
             $this->_db->query($sql);
 
@@ -245,23 +269,32 @@ class Product {
                 $this->_db->query('UPDATE product SET img="' . $fileName . '" WHERE id=' . $this->_id);
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
             return null;
         }
     }
 
-    public function deleteFromDb() {
+    public function deleteFromDb()
+    {
         try {
+            $toneList = ProductTone::getAllInstance($this);
+            if ($toneList !== false) {
+                foreach ($toneList as $tone) {
+                    $tone->deleteFromDb;
+                }
+            }
+
             $this->_img->delete();
 
             $sql = 'DELETE FROM product WHERE id=' . $this->_id;
             $this->_db->query($sql);
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
         }
     }
 
-    public function deleteImg() {
+    public function deleteImg()
+    {
         try {
             $this->_img->delete();
 
@@ -269,11 +302,12 @@ class Product {
                     WHERE id=' . $this->_id;
             $this->_db->query($sql);
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
         }
     }
 
-    public static function getInstanceById($id) {
+    public static function getInstanceById($id)
+    {
         try {
             $db = simo_db::getInstance();
             $result = $db->query('SELECT * FROM product WHERE id=' . $id, simo_db::QUERY_MOD_ASSOC);
@@ -283,18 +317,20 @@ class Product {
                 return $o;
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
             return null;
         }
     }
 
-    public static function getInstanceByArray(array $array) {
+    public static function getInstanceByArray(array $array)
+    {
         $o = new Product();
         $o->assignByHash($array);
         return $o;
     }
 
-    protected function assignByHash(array $result) {
+    protected function assignByHash(array $result)
+    {
         $this->setId($result['id']);
         $this->setTitle($result['title']);
         $this->setRubric($result['product_rubric_id']);
@@ -302,6 +338,7 @@ class Product {
         $this->setShortText($result['short_text']);
         $this->setFullText($result['full_text']);
         $this->setPrice($result['price']);
+        $this->setIsSpec($result['is_spec']);
     }
 
 }

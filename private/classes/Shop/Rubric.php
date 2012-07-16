@@ -32,18 +32,22 @@ class Rubric {
      * @access protected
      */
     protected $_isRoot = 0;
+
+    /**
+     * @var simo_db
+     */
     private $_db;
 
     /**
      *
      *
-     * @param int id
+     * @param int
 
-     * @param string name
+     * @param string
 
-     * @param int parent
+     * @param int
 
-     * @return
+     * @return Rubric
      * @access public
      */
     public function __construct($id = 0, $title = '', $parent = 0) {
@@ -114,9 +118,9 @@ class Rubric {
     /**
      *
      *
-     * @param int value
+     * @param int
 
-     * @return
+     * @return void
      * @access public
      */
     public function setId($value) {
@@ -128,9 +132,9 @@ class Rubric {
     /**
      *
      *
-     * @param string value
+     * @param string
 
-     * @return
+     * @return void
      * @access public
      */
     public function setTitle($value) {
@@ -142,7 +146,7 @@ class Rubric {
     /**
      *
      *
-     * @param int value
+     * @param int
 
      * @return int
      * @access public
@@ -156,9 +160,9 @@ class Rubric {
     /**
      *
      *
-     * @param bool value
+     * @param bool
 
-     * @return
+     * @return void
      * @access public
      */
     public function setIsRoot($value) {
@@ -255,7 +259,7 @@ class Rubric {
                 return $o;
             }
         } catch (Exception $e) {
-            simo_exception::registrMsg($e, $this->_debug);
+            simo_exception::registrMsg($e, true);
             return null;
         }
     }
